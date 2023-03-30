@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<div>
+    <h2 th:text="${department.name}"></h2>
+    <span th:text="${department.description}"></span><br>
+    <a th:href="@{'/profile?id=' + ${department.manager.id}}"
+       th:if="${department.manager}"
+       th:text="${department.manager.info.surname + ' ' + department.manager.info.name + ' ' +
+                department.manager.info.middleName}"></a> <br>
+    <ul>
+        <li th:each="user : ${department.employees}">
+            <a th:href="@{'/profile?id=' + ${user.id}}"
+               th:text="${user.info.surname + ' ' + user.info.name + ' ' +
+                user.info.middleName}"></a>
+        </li>
+    </ul>
+</div>
+
+</body>
+</html>

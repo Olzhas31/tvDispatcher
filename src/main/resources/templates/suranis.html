@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div>
+    <h2>СҰраныс</h2>
+    <span th:text="'Id: ' + ${suranis.id}"></span> <br>
+    <span th:text="'Status: ' + ${suranis.status.name()}"></span> <br>
+    <span th:text="'Тақырыбы: ' + ${suranis.title}"></span> <br>
+    <span th:text="'Description: ' + ${suranis.description}"></span> <br>
+    <span th:text="'Сұраныс авторы: ' + ${suranis.name}"></span> <br>
+    <span th:text="'Email: ' + ${suranis.email}"></span> <br>
+    <span th:text="'Байланыс номер: ' + ${suranis.phoneNumber}"></span> <br>
+    <span th:text="'Мекен-жай: ' + ${suranis.address}"></span> <br>
+    <span th:text="'Кездесу уақыты: ' + ${suranis.meetingTime}"></span> <br>
+    <span th:text="'Құрылған уақыты: ' + ${suranis.createdTime}"></span> <br>
+    <span>Жауапты қызметкерлер: </span>
+    <span th:each="userSuranis : ${suranis.employees}"
+          th:text="${userSuranis.user.role.name + ' : ' +  userSuranis.user.info.surname +
+                ' ' + userSuranis.user.info.name + ' ' + userSuranis.user.info.middleName +
+                ' ' + userSuranis.employeeApproved + ' '}">
+    </span><br>
+    <a th:href="@{'/dispatcher-approve?suranis-id=' + ${suranis.id}}" th:text="Қабылдау"></a>
+    <a th:href="@{'/employee-approve?suranis-id=' + ${suranis.id}}">Қабылдау 2</a>
+    <form method="post" action="/add-user-to-suranis">
+        <input type="hidden" name="suranisId" th:value="${suranis.id}">
+        <select name="userId" required>
+            <option th:each="user: ${users}"
+                    th:value="${user.id}"
+                    th:text="${user.role.name + ' : ' +  user.info.surname + ' ' + user.info.name + ' ' + user.info.middleName}">
+            </option>
+        </select>
+        <input type="submit" value="Қосу">
+    </form>
+</div>
+</body>
+</html>

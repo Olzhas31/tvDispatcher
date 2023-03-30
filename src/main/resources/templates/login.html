@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Espire - Admin Dashboard Template</title>
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="assets/images/logo/favicon.ico">
+
+    <!-- page css -->
+
+    <!-- Core css -->
+    <link href="assets/css/app.min.css" rel="stylesheet">
+
+</head>
+
+<body>
+<div class="auth-full-height container d-flex flex-column justify-content-center">
+    <div class="row justify-content-center">
+        <div class="col-md-9">
+            <div class="card row mx-0 flex-row overflow-hidden">
+                <div class="col-md-4 bg-size-cover d-flex align-items-center p-4"
+                     style="background-image: url('assets/images/others/bg-2.jpg');">
+                    <div>
+                        <div class="mb-5">
+                            <div class="logo">
+                                <img alt="logo" class="img-fluid" src="assets/images/logo/logo-white.png"
+                                     style="height: 50px;">
+                            </div>
+                        </div>
+                        <h3 class="text-white">Біздің ақпараттық жүйеге қош келдіңіз</h3>
+                        <p class="text-white mt-4 mb-5 o-75">Егер біздің қызметкер болсаңыз, өзіңіздің жеке
+                            деректеріңізді енгізіп жүйеге кіріңіз</p>
+                    </div>
+                </div>
+                <div class="col-md-8 px-0">
+                    <div class="card-body">
+                        <div class="my-5 mx-auto" style="max-width: 350px;">
+                            <div class="mb-3">
+                                <h3>Жүйеге кіру</h3>
+                            </div>
+                            <div class="mb-3 alert alert-danger" th:if="${param.error}">
+                                <span th:text="${'Қолданушы аты немесе құпиясөз дұрыс енгізілмеді'}"></span>
+                            </div>
+                            <div class="mb-3 alert alert-primary" th:if="${param.logout}">
+                                <span th:text="${'Сіз жүйеден шықтыңыз'}"></span>
+                            </div>
+                            <div class="mb-3 alert alert-primary" th:if="${param.success_register}">
+                                <span th:text="${'Сіз жүйеге сәтті тіркелдіңіз'}"></span>
+                            </div>
+                            <div class="mb-3 alert alert-primary" th:if="${param.success_update}">
+                                <span th:text="${'Сіз жеке деректеріңіз сәтті өзгерді'}"></span>
+                            </div>
+
+                            <form action="login" method="POST">
+                                <div class="form-group mb-3">
+                                    <label class="form-label">Электрондық почта</label>
+                                    <input type="text" class="form-control" name="username"/>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label d-flex justify-content-between">
+                                        <span>Құпия сөз</span>
+                                        <a href="/forgot-password" class="text-primary font">Құпия сөзді ұмыттыңыз
+                                            ба?</a>
+                                    </label>
+                                    <div class="form-group input-affix flex-column">
+                                        <label class="d-none">Құпия сөз</label>
+                                        <input name="password" formcontrolname="password" class="form-control"
+                                               type="password">
+                                        <i class="suffix-icon feather cursor-pointer text-dark icon-eye"
+                                           ng-reflect-ng-class="icon-eye"></i>
+                                    </div>
+                                </div>
+                                <button type="submit" class="btn btn-primary w-100">Жүйеге кіру</button>
+                            </form>
+                            <div class="mb-3">
+                                <a href="/register" class="text-primary font">Жүйеге тіркелу</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Core Vendors JS -->
+<script src="assets/js/vendors.min.js"></script>
+
+<!-- page js -->
+
+<!-- Core JS -->
+<script src="assets/js/app.min.js"></script>
+
+</body>
+
+</html>

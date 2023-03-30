@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Espire - Admin Dashboard Template</title>
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="assets/images/logo/favicon.ico">
+
+    <!-- page css -->
+
+    <!-- Core css -->
+    <link href="assets/css/app.min.css" rel="stylesheet">
+
+</head>
+
+<body>
+<div class="layout">
+    <div class="horizontal-layout">
+        <!-- Header START -->
+        <div class="header-text-dark header-nav layout-horizon">
+            <div class="header-nav-wrap container">
+                <div class="header-nav-left">
+                    <div class="nav-logo">
+                        <div class="w-100 logo">
+                            <img class="img-fluid" src="assets/images/logo/logo.png" style="max-height: 70px;" alt="logo">
+                        </div>
+                    </div>
+                    <div class="header-nav-item mobile-toggle">
+                        <div class="header-nav-item-select cursor-pointer">
+                            <i class="nav-icon feather icon-menu icon-arrow-right"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="header-nav-right">
+                    <div class="header-nav-item">
+                        <div class="header-nav-item-select">
+                            <div class="toggle-wrapper" data-bs-toggle="modal" data-bs-target="#quick-view">
+                                <i class="nav-icon feather icon-settings"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Header END -->
+
+        <!-- Header Navbar START -->
+        <div class="header-navbar nav-menu-light">
+            <div class="container">
+                <ul class="nav-menu nav-menu-horizontal">
+                    <li class="nav-menu-item">
+                        <a href="/">
+                            <i class="feather icon-home"></i>
+                            <span class="nav-menu-item-title">Басты бет</span>
+                        </a>
+                    </li>
+                    <li class="nav-menu-item" style="padding-left: 20px">
+                        <a href="/profile">
+                            <i class="feather icon-home"></i>
+                            <span class="nav-menu-item-title">Жеке кабинет</span>
+                        </a>
+                    </li>
+                    <li class="nav-menu-item" style="padding-left: 20px">
+                        <a href="/departments">
+                            <i class="feather icon-home"></i>
+                            <span class="nav-menu-item-title">Ұйымның құрылымы</span>
+                        </a>
+                    </li>
+                    <li class="nav-submenu">
+                        <div class="nav-submenu-title">
+                                <span>
+                                    <i class="feather icon-grid"></i>
+                                    <span>Сұраныстар</span>
+                                </span>
+                            <i class="nav-submenu-arrow caret-bottom"></i>
+                        </div>
+                        <ul class="nav-menu">
+                            <li class="nav-menu-item">
+                                <a href="/my-suranistar">
+                                    <i class="feather icon-home"></i>
+                                    <span class="nav-menu-item-title">Менің сұраныстарым</span>
+                                </a>
+                            </li>
+                            <li class="nav-menu-item">
+                                <a href="/archive-suranistar">
+                                    <i class="feather icon-home"></i>
+                                    <span class="nav-menu-item-title">Менің сұраныстарым (Архив)</span>
+                                </a>
+                            </li>
+                            <li class="nav-menu-item">
+                                <a href="/dispatcher-suranistar">
+                                    <i class="feather icon-home"></i>
+                                    <span class="nav-menu-item-title">Барлық сұраныстар</span>
+                                </a>
+                            </li>
+                            <li class="nav-menu-item">
+                                <a href="/manager-suranistar">
+                                    <i class="feather icon-home"></i>
+                                    <span class="nav-menu-item-title">Департамент сұраныстары</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="nav-menu-item">
+                        <a href="/about-us">
+                            <i class="feather icon-home"></i>
+                            <span class="nav-menu-item-title">Біз туралы</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <!-- Header Navbar END -->
+
+        <!-- Side Nav START -->
+        <div class="side-nav vertical-menu nav-menu-light scrollable">
+            <div class="nav-logo">
+                <div class="w-100 logo">
+                    <img class="img-fluid" src="assets/images/logo/logo.png" style="max-height: 70px;" alt="logo">
+                </div>
+                <div class="mobile-close">
+                    <i class="icon-arrow-left feather"></i>
+                </div>
+            </div>
+            <ul class="nav-menu">
+                <li class="nav-menu-item router-link-active">
+                    <a href="">
+                        <i class="feather icon-home"></i>
+                        <span class="nav-menu-item-title">Menu Item</span>
+                    </a>
+                </li>
+                <li class="nav-group-title">MENU TITLE</li>
+                <li class="nav-menu-item">
+                    <a href="">
+                        <i class="feather icon-mail"></i>
+                        <span class="nav-menu-item-title">Menu Item 1</span>
+                    </a>
+                </li>
+                <li class="nav-menu-item">
+                    <a href="">
+                        <i class="feather icon-message-circle"></i>
+                        <span class="nav-menu-item-title">Menu Item 2</span>
+                    </a>
+                </li>
+                <li class="nav-submenu">
+                    <a class="nav-submenu-title">
+                        <i class="feather icon-box"></i>
+                        <span>Submenu</span>
+                        <i class="nav-submenu-arrow"></i>
+                    </a>
+                    <ul class="nav-menu menu-collapse">
+                        <li class="nav-menu-item">
+                            <a href="">Submenu Item 2</a>
+                        </li>
+                        <li class="nav-menu-item">
+                            <a href="">Submenu Item 2</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        <!-- Side Nav END -->
+
+        <!-- Content START -->
+        <div class="content container">
+            <div class="main">
+                <span th:if="${isSuranisCreated}">Сіздің сұранысыңыз сәтті құрылды</span>
+                <h2>Жаңа сұраныс құру</h2>
+                <span>
+                    Біздің телеарна сіздерге келу үшін келесі форманы толтырып жіберіңіз
+                </span>
+<!--                TODO lael id-->
+                <form method="post" action="/create-suranis" style="width: 500px;">
+                    <div class="mb-3">
+                        <label class="form-label">Аты-жөніңіз</label>
+                        <input type="text" name="name" class="form-control" placeholder="Name" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Сұраныс тақырыбы</label>
+                        <input type="text" name="title" class="form-control" placeholder="Title" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Телевидение шақыру себебіңіз</label>
+                        <input type="text" name="description" class="form-control" placeholder="Description" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Электрондық почтаңыз</label>
+                        <input type="email" name="email" class="form-control" placeholder="Email" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Телефон номеріңіз</label>
+                        <input type="text" name="phoneNumber" class="form-control" placeholder="phoneNumber" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Телевидениемен кездесетін мекенжай</label>
+                        <input type="text" name="address" class="form-control" placeholder="Address" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Телевидениемен кездесетін уақыт</label>
+                        <input type="datetime-local" name="meetingTime" class="form-control" required>
+                    </div>
+                    <input class="btn btn-primary" type="submit" value="Жіберу">
+                </form>
+            </div>
+            <!-- Footer START -->
+            <div class="footer">
+                <div class="footer-content">
+                    <p class="mb-0">Copyright © 2023 Дипломдық жоба. Барлық құқықтар қорғалған Қазақ Ұлттық Университеті. </p>
+                </div>
+            </div>
+            <!-- Footer End -->
+        </div>
+        <!-- Content END -->
+
+        <!-- Quick View START -->
+        <div class="modal modal-right fade quick-view" id="quick-view">
+            <div class="modal-dialog right">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title pull-left">Quick View</h4>
+                        <button type="button" class="close pull-right" data-bs-dismiss="modal">
+                            <span>×</span>
+                        </button>
+                    </div>
+                    <div class="modal-body scrollable">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Quick View END -->
+    </div>
+</div>
+
+
+<!-- Core Vendors JS -->
+<script src="assets/js/vendors.min.js"></script>
+
+<!-- page js -->
+
+<!-- Core JS -->
+<script src="assets/js/app.min.js"></script>
+
+</body>
+
+</html>

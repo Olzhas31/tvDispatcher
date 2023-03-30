@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>my-suranistar</title>
+</head>
+<body>
+    <div>
+        <h2>Жаңа келген сұраныстар</h2>
+        <ul>
+            <li th:each="usersSuranis : ${usersSuranistar}">
+                <span th:text="'Id: ' + ${usersSuranis.suranis.id}"></span> <br>
+                <a th:href="@{'/suranis?id=' + ${usersSuranis.suranis.id}}"
+                   th:text="'Тақырыбы: ' + ${usersSuranis.suranis.title}"></a> <br>
+                <span th:text="'Сұраныс авторы: ' + ${usersSuranis.suranis.name}"></span> <br>
+                <span th:text="'Құрылған уақыты: ' + ${usersSuranis.suranis.createdTime}"></span> <br>
+            </li>
+        </ul>
+    </div>
+    <div>
+
+    </div>
+</body>
+</html>
