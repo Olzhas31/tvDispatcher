@@ -6,6 +6,7 @@ import com.example.tvDispatcher.entity.User;
 import com.example.tvDispatcher.entity.UsersSuranistar;
 import com.example.tvDispatcher.model.AddUserToSuranisRequest;
 import com.example.tvDispatcher.model.SuranisCreateRequest;
+import com.example.tvDispatcher.service.INotificationService;
 import com.example.tvDispatcher.service.ISuranisService;
 import com.example.tvDispatcher.service.IUserService;
 import lombok.AllArgsConstructor;
@@ -26,12 +27,17 @@ public class SuranisController {
 
     private final ISuranisService suranisService;
     private final IUserService userService;
+    private final INotificationService notificationService;
+    private final Integer limit = 5;
 
     @GetMapping("/suranis")
-    public String suranis(Model model, @RequestParam(name = "id") Long id) {
+    public String suranis(Authentication authentication, Model model, @RequestParam(name = "id") Long id) {
+        User user = (User) authentication.getPrincipal();
         Suranis suranis = suranisService.getById(id);
         model.addAttribute("suranis", suranis);
         model.addAttribute("users", userService.getUsers());
+        model.addAttribute("i", user);
+        model.addAttribute("notifications", notificationService.getNotificationsByUserAndLimit(user, limit));
         return "suranis";
     }
 
@@ -41,30 +47,62 @@ public class SuranisController {
         User user = (User) authentication.getPrincipal();
         List<UsersSuranistar> active = suranisService.getActiveSuranistarByUser(user);
         model.addAttribute("usersSuranistar", active);
+        model.addAttribute("i", user);
+        model.addAttribute("notifications", notificationService.getNotificationsByUserAndLimit(user, limit));
         return "my-suranistar";
     }
 
     @GetMapping("/archive-suranistar")
-    public String archiveSuranistar() {
+    public String archiveSuranistar(Authentication authentication,
+                                    Model model) {
+        User user = (User) authentication.getPrincipal();
+        List<Suranis> suranistar = suranisService.getArchive();
+
+        model.addAttribute("i", user);
+        model.addAttribute("users", userService.getUsers(true));
+        model.addAttribute("suranistar", suranistar);
+        model.addAttribute("status_zhabildi", Status.ZHABILDI);
+        model.addAttribute("status_uaqiti_otip_ketti", Status.UAQITI_OTIP_KETTI);
+        model.addAttribute("notifications", notificationService.getNotificationsByUserAndLimit(user, limit));
         return "archive-suranistar";
     }
 
     @GetMapping("/dispatcher-suranistar")
-    public String dispatcherSuranistar(Model model) {
+    public String dispatcherSuranistar(Authentication authentication, Model model) {
+        User user = (User) authentication.getPrincipal();
+        model.addAttribute("i", user);
         model.addAttribute("suranistar", suranisService.getNewSuranistar());
+        model.addAttribute("dispathcerApprovedSuranistar", suranisService.getDispatcherApprovedSuranistar());
+        model.addAttribute("employeeApprovedSuranistar", suranisService.getEmployeeApprovedSuranistar());
+        model.addAttribute("managerApprovedSuranistar", suranisService.getManagerApprovedSuranistar());
+        model.addAttribute("inProcessSuranistar", suranisService.getInProcessSuranistar());
+        model.addAttribute("notifications", notificationService.getNotificationsByUserAndLimit(user, limit));
         return "dispatcher-suranistar";
     }
 
     @GetMapping("/manager-suranistar")
-    public String allSuranistar() {
-        return "dispatcher-suranistar";
+    public String allSuranistar(Authentication authentication, Model model) {
+        User user = (User) authentication.getPrincipal();
+        model.addAttribute("suranistar", suranisService.getDepartmentSuranistar(user));
+        model.addAttribute("i", user);
+        model.addAttribute("notifications", notificationService.getNotificationsByUserAndLimit(user, limit));
+        return "manager-suranistar";
+    }
+
+    @GetMapping("/new-suranis")
+    public String newSuranis(Authentication authentication, Model model) {
+        if (authentication != null) {
+            User user = (User) authentication.getPrincipal();
+            model.addAttribute("i", user);
+            model.addAttribute("notifications", notificationService.getNotificationsByUserAndLimit(user, limit));
+        }
+        return "new-suranis";
     }
 
     @PostMapping("/create-suranis")
     public String create(SuranisCreateRequest request, Model model) {
         suranisService.save(request);
-        model.addAttribute("isSuranisCreated", "Сіздің сұраныс сәтті құрылды. Жауап күтіңіз!");
-        return "index";
+        return "redirect:/?isSuranisCreated";
     }
 
     @PostMapping("/add-user-to-suranis")
@@ -84,7 +122,21 @@ public class SuranisController {
                                   @RequestParam(name = "suranis-id") Long suranisId) {
         User user = (User) authentication.getPrincipal();
         suranisService.approveByEmployee(user, suranisId);
+        return "redirect:/my-suranistar";
+    }
+
+    @GetMapping("/manager-approve")
+    public String managerApprove(Authentication authentication,
+                                 @RequestParam(name = "suranis-id") Long suranisId,
+                                 @RequestParam(name = "user-id") Long userId) {
+        User user = (User) authentication.getPrincipal();
+        suranisService.approveByManager(user, suranisId, userId);
         return "redirect:/suranis?id=" + suranisId;
     }
 
+    @GetMapping("/to-process")
+    public String toProcess(@RequestParam(name = "id") Long id) {
+        suranisService.toProcess(id);
+        return "redirect:/dispatcher-suranistar";
+    }
 }

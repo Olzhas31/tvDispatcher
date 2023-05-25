@@ -26,12 +26,26 @@ public class WebSecurityConfig {
         http
                 .csrf().disable()
                 .authorizeHttpRequests()
-                .requestMatchers("/", "/error", "/login", "/register", "/forgot-password")
+                .requestMatchers("/",
+                        "/error",
+                        "/login",
+                        "/register",
+                        "/forgot-password",
+                        "/new-suranis",
+                        "/about-us",
+                        "/programs",
+                        "/departments",
+                        "/faq")
                     .permitAll()
                 .requestMatchers(HttpMethod.POST, "/create-suranis")
                     .permitAll()
-//                .requestMatchers("/admin", "/admin/users", "/admin/activity", "/save-user", "/change-block")
-//                    .hasAuthority(Roles.ADMIN.name())
+                .requestMatchers("/admin",
+                        "/admin-users",
+                        "/admin-new-users",
+                        "/admin-enable-user",
+                        "/admin-block-user",
+                        "/admin-unblock-user")
+                    .hasAuthority("ADMIN")
 //                .requestMatchers(HttpMethod.POST, "/save-user")
 //                    .hasAuthority(Roles.ADMIN.name())
                 .anyRequest().authenticated()

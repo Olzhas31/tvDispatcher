@@ -1,10 +1,389 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+
 <head>
-    <meta charset="UTF-8">
-    <title>archive-suranistar</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Сұраныстар</title>
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="assets/images/logo/favicon.ico">
+
+    <!-- page css -->
+    <link href="assets/vendors/datatables/dataTables.bootstrap.min.css" rel="stylesheet">
+
+    <!-- Core css -->
+    <link href="assets/css/app.min.css" rel="stylesheet">
+
 </head>
+
 <body>
+<div class="layout">
+    <div class="horizontal-layout">
+        <!-- Header START -->
+        <div class="header-text-dark header-nav layout-horizon">
+            <div class="header-nav-wrap container">
+                <div class="header-nav-left">
+                    <div class="nav-logo">
+                        <div class="w-100 logo">
+                            <img class="img-fluid" src="assets/images/logo/logo.png" style="max-height: 70px;" alt="logo">
+                        </div>
+                    </div>
+                    <div class="header-nav-item mobile-toggle">
+                        <div class="header-nav-item-select cursor-pointer">
+                            <i class="nav-icon feather icon-menu icon-arrow-right"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="header-nav-right">
+                    <div class="header-nav-item" sec:authorize="isAuthenticated()">
+                        <div class="dropdown header-nav-item-select nav-notification">
+                            <div class="toggle-wrapper" id="nav-notification-dropdown" data-bs-toggle="dropdown">
+                                <i class="header-nav-item-select nav-icon feather icon-bell"></i>
+                            </div>
+                            <div class="dropdown-menu dropdown-menu-end">
+                                <div class="nav-notification-header">
+                                    <h5 class="mb-0">Хабарламалар</h5>
+                                    <!--                                    <a href="#" class="font-size-sm">Барлығы оқылды</a>-->
+                                </div>
+                                <div class="nav-notification-body">
+                                    <div class="nav-notification-item " th:each="notification : ${notifications}">
+                                        <div class="bg-primary feather font-size-lg icon-info avatar avatar-circle" style="width: 40px; height: 40px; line-height: 40px;">                                            </div>
+                                        <div class="ms-2">
+                                                <span>
+                                                    <span class="fw-bolder text-dark"> </span>
+                                                    <span th:text="${notification.content}"></span>
+                                                </span>
+                                            <div class="font-size-sm fw-bold mt-1">
+                                                <i class="feather icon-clock"></i>
+                                                <span class="ms-1" th:text="${notification.createdTime}"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="nav-notification-footer">
+                                    <a href="/notifications" class="font-size-sm">Барлығын көру</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="header-nav-item" sec:authorize="isAuthenticated()">
+                        <div class="dropdown header-nav-item-select nav-profile" >
+                            <div class="toggle-wrapper" id="nav-profile-dropdown" data-bs-toggle="dropdown">
+                                <div class="avatar avatar-text bg-primary" th:if="${i.role.name == 'MANAGER'}">
+                                    <span th:text="${i.info.surname.charAt(0) + '' + i.info.name.charAt(0)}"></span>
+                                </div>
+                                <div class="avatar avatar-text bg-success" th:if="${i.role.name != 'MANAGER'}">
+                                    <span th:text="${i.info.surname.charAt(0) + '' + i.info.name.charAt(0)}"></span>
+                                </div>
+                                <span class="fw-bold mx-1"
+                                      th:text="${i.info.surname + ' ' + i.info.name}"> </span>
+                                <i class="feather icon-chevron-down"></i>
+                            </div>
+                            <div class="dropdown-menu dropdown-menu-end">
+                                <div class="nav-profile-header">
+                                    <div class="d-flex align-items-center">
+                                        <div class="avatar avatar-text bg-primary" th:if="${i.role.name == 'MANAGER'}">
+                                            <span th:text="${i.info.surname.charAt(0) + '' + i.info.name.charAt(0)}"></span>
+                                        </div>
+                                        <div class="avatar avatar-text bg-success" th:if="${i.role.name != 'MANAGER'}">
+                                            <span th:text="${i.info.surname.charAt(0) + '' + i.info.name.charAt(0)}"></span>
+                                        </div>
+                                        <div class="d-flex flex-column ms-1">
+                                            <span class="fw-bold text-dark"
+                                                  th:text="${i.info.surname + ' ' + i.info.name}"></span>
+                                            <span class="font-size-sm"
+                                                  th:text="${i.email}"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <a href="/profile" class="dropdown-item">
+                                    <div class="d-flex align-items-center">
+                                        <i class="font-size-lg me-2 feather icon-user"></i>
+                                        <span>Жеке кабинет</span>
+                                    </div>
+                                </a>
+                                <a href="/edit-profile" class="dropdown-item">
+                                    <div class="d-flex align-items-center">
+                                        <i class="font-size-lg me-2 feather icon-settings"></i>
+                                        <span>Жеке деректерді өзгерту</span>
+                                    </div>
+                                </a>
+                                <a href="/logout" class="dropdown-item">
+                                    <div class="d-flex align-items-center"><i class="font-size-lg me-2 feather icon-power"></i>
+                                        <span>Шығу</span>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="header-nav-item" sec:authorize="isAnonymous()">
+                        <a class="btn btn-primary" href="/login" role="button">Кіру</a>
+                    </div>
+
+                    <div class="header-nav-item" sec:authorize="isAnonymous()" style="padding-left: 20px">
+                        <a class="btn btn-primary" href="/register" role="button">Тіркелу</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Header END -->
+
+        <!-- Header Navbar START -->
+        <div class="header-navbar nav-menu-light">
+            <div class="container">
+                <ul class="nav-menu nav-menu-horizontal">
+                    <li class="nav-menu-item">
+                        <a href="/">
+                            <i class="feather icon-home"></i>
+                            <span class="nav-menu-item-title">Басты бет</span>
+                        </a>
+                    </li>
+                    <li class="nav-menu-item" style="padding-left: 20px" sec:authorize="isAuthenticated()">
+                        <a href="/profile">
+                            <i  class="la-address-card la"></i>
+                            <span class="nav-menu-item-title">Жеке парақша</span>
+                        </a>
+                    </li>
+                    <li class="nav-menu-item" style="padding-left: 20px">
+                        <a href="/programs">
+                            <i class="icon-layers feather"></i>
+                            <span class="nav-menu-item-title">Бағдарлама</span>
+                        </a>
+                    </li>
+                    <li class="nav-menu-item" style="padding-left: 20px">
+                        <a href="/departments">
+                            <i  class="la-bezier-curve la"></i>
+                            <span class="nav-menu-item-title">Ұйымның құрылымы</span>
+                        </a>
+                    </li>
+                    <li class="nav-menu-item" style="padding-left: 20px" sec:authorize="isAuthenticated()">
+                        <a href="/calendar">
+                            <i  class="la-bezier-curve la"></i>
+                            <span class="nav-menu-item-title">Жұмыс кестесі</span>
+                        </a>
+                    </li>
+                    <li class="nav-submenu" sec:authorize="isAuthenticated()">
+                        <div class="nav-submenu-title">
+                                <span>
+                                     <i  class="la-chevron-right la"></i>
+                                    <span>Сұраныстар</span>
+                                </span>
+                            <i class="nav-submenu-arrow caret-bottom"></i>
+                        </div>
+                        <ul class="nav-menu">
+                            <li class="nav-menu-item">
+                                <a href="/my-suranistar">
+                                    <i  class="la-chevron-right la"></i>
+                                    <span class="nav-menu-item-title">Менің сұраныстарым</span>
+                                </a>
+                            </li>
+                            <li class="nav-menu-item">
+                                <a href="/archive-suranistar">
+                                    <i  class="la-chevron-right la"></i>
+                                    <span class="nav-menu-item-title">Архив</span>
+                                </a>
+                            </li>
+                            <li class="nav-menu-item">
+                                <a href="/dispatcher-suranistar">
+                                    <i  class="la-chevron-right la"></i>
+                                    <span class="nav-menu-item-title">Барлық сұраныстар</span>
+                                </a>
+                            </li>
+                            <li class="nav-menu-item">
+                                <a href="/manager-suranistar" th:if="${i.role.name == 'MANAGER'}">
+                                    <i  class="la-chevron-right la"></i>
+                                    <span class="nav-menu-item-title">Департамент сұраныстары</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="nav-menu-item" style="padding-left: 20px">
+                        <a href="/new-suranis">
+                            <i class="icon-file-plus feather"></i>
+                            <span class="nav-menu-item-title">Сұраныс құру</span>
+                        </a>
+                    </li>
+                    <li class="nav-menu-item" style="padding-left: 20px">
+                        <a href="/about-us">
+                            <i class="icon-tv feather"></i>
+                            <span class="nav-menu-item-title">Біз туралы</span>
+                        </a>
+                    </li>
+                    <li class="nav-menu-item" style="padding-left: 20px">
+                        <a href="/faq">
+                            <i class="icon-help-circle feather"></i>
+                            <span class="nav-menu-item-title">Сұрақ-жауап</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <!-- Header Navbar END -->
+
+        <!-- Side Nav START -->
+        <div class="side-nav vertical-menu nav-menu-light scrollable">
+            <div class="nav-logo">
+                <div class="w-100 logo">
+                    <img class="img-fluid" src="assets/images/logo/logo.png" style="max-height: 70px;" alt="logo">
+                </div>
+                <div class="mobile-close">
+                    <i class="icon-arrow-left feather"></i>
+                </div>
+            </div>
+            <ul class="nav-menu">
+                <li class="nav-menu-item router-link-active">
+                    <a href="">
+                        <i class="feather icon-home"></i>
+                        <span class="nav-menu-item-title">Menu Item</span>
+                    </a>
+                </li>
+                <li class="nav-group-title">MENU TITLE</li>
+                <li class="nav-menu-item">
+                    <a href="">
+                        <i class="feather icon-mail"></i>
+                        <span class="nav-menu-item-title">Menu Item 1</span>
+                    </a>
+                </li>
+                <li class="nav-menu-item">
+                    <a href="">
+                        <i class="feather icon-message-circle"></i>
+                        <span class="nav-menu-item-title">Menu Item 2</span>
+                    </a>
+                </li>
+                <li class="nav-submenu">
+                    <a class="nav-submenu-title">
+                        <i class="feather icon-box"></i>
+                        <span>Submenu</span>
+                        <i class="nav-submenu-arrow"></i>
+                    </a>
+                    <ul class="nav-menu menu-collapse">
+                        <li class="nav-menu-item">
+                            <a href="">Submenu Item 2</a>
+                        </li>
+                        <li class="nav-menu-item">
+                            <a href="">Submenu Item 2</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        <!-- Side Nav END -->
+
+        <!-- Content START -->
+        <div class="content container">
+            <div class="main">
+
+                <div class="page-header">
+                    <h4 class="page-title">Сұраныстар архиві</h4>
+                    <div class="breadcrumb">
+                        <span class="me-1 text-gray"><i class="feather icon-home"></i></span>
+                        <div class="breadcrumb-item"><a href="/"> Басты бет </a></div>
+                        <div class="breadcrumb-item"><a href="#"> Сұраныстар </a></div>
+                        <div class="breadcrumb-item"><a href="/archive-suranistar"> Архив</a></div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-body">
+                        <div class="mt-4">
+                            <table id="data-table" class="table data-table">
+                                <thead>
+                                <tr>
+                                    <th>Id</th>
+                                    <th>Тақырып</th>
+                                    <th>Автор</th>
+                                    <th>Құрылған уақыты</th>
+                                    <th>Статус</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr th:each="suranis : ${suranistar}">
+                                    <td th:text="${suranis.id}"></td>
+                                    <td>
+                                        <a th:href="@{'/suranis?id=' + ${suranis.id}}" th:text="${suranis.title}"></a>
+                                    </td>
+                                    <td>
+                                        <span th:text="${suranis.name}"></span>
+                                    </td>
+                                    <td>
+                                        <span th:text="${suranis.createdTime}"></span>
+                                    </td>
+                                    <td>
+                                        <div th:if="${suranis.status == status_zhabildi}" class="d-flex align-items-center text-success">
+                                            <span class="badge-dot me-2 bg-success"></span>
+                                            <span class="text-capitalize" th:text="${suranis.status}"></span>
+                                        </div>
+                                        <div th:if="${suranis.status == status_uaqiti_otip_ketti}" class="d-flex align-items-center text-danger">
+                                            <span class="badge-dot me-2 bg-danger"></span>
+                                            <span class="text-capitalize" th:text="${suranis.status}"></span>
+                                        </div>
+                                    </td>
+                                </tr>
+                                </tbody>
+                                <tfoot>
+                                <tr>
+                                    <th>Id</th>
+                                    <th>Тақырып</th>
+                                    <th>Автор</th>
+                                    <th>Құрылған уақыты</th>
+                                    <th>Статус</th>
+                                </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <!-- Footer START -->
+            <div class="footer">
+                <div class="footer-content">
+                    <p class="mb-0">Copyright © 2023 Дипломдық жоба. Барлық құқықтар қорғалған Қазақ Ұлттық Университеті. </p>
+                </div>
+            </div>
+            <!-- Footer End -->
+        </div>
+        <!-- Content END -->
+
+        <!-- Quick View START -->
+        <div class="modal modal-right fade quick-view" id="quick-view">
+            <div class="modal-dialog right">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title pull-left">Quick View</h4>
+                        <button type="button" class="close pull-right" data-bs-dismiss="modal">
+                            <span>×</span>
+                        </button>
+                    </div>
+                    <div class="modal-body scrollable">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Quick View END -->
+    </div>
+</div>
+
+
+<!-- Core Vendors JS -->
+<script src="assets/js/vendors.min.js"></script>
+
+<!-- page js -->
+<script src="assets/vendors/datatables/jquery.dataTables.min.js"></script>
+<script src="assets/vendors/datatables/dataTables.bootstrap.min.js"></script>
+<script>
+    $('.data-table').DataTable({
+        'columnDefs': [
+            { 'orderable': false, 'targets': 0 }
+        ]
+    });
+</script>
+
+<!-- Core JS -->
+<script src="assets/js/app.min.js"></script>
 
 </body>
 </html>

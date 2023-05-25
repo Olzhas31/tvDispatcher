@@ -51,6 +51,12 @@ public class User implements UserDetails {
     @ToString.Exclude
     private List<UsersSuranistar> suranistar;
 
+    @Column(name = "enabled")
+    private Boolean enabled;
+
+    @Column(name = "locked")
+    private Boolean locked;
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         SimpleGrantedAuthority authority = new SimpleGrantedAuthority(role.getName());
@@ -69,7 +75,7 @@ public class User implements UserDetails {
 
     @Override
     public boolean isAccountNonLocked() {
-        return true;
+        return !locked;
     }
 
     @Override
@@ -79,7 +85,7 @@ public class User implements UserDetails {
 
     @Override
     public boolean isEnabled() {
-        return true;
+        return enabled;
     }
 
     @Override

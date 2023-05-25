@@ -4,12 +4,13 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Біздің арна туралы ақпарат</title>
+    <title>Жұмыс кестесі</title>
 
     <!-- Favicon -->
     <link rel="shortcut icon" href="assets/images/logo/favicon.ico">
 
     <!-- page css -->
+    <link href="assets/vendors/fullcalendar/lib/main.min.css" rel="stylesheet"/>
 
     <!-- Core css -->
     <link href="assets/css/app.min.css" rel="stylesheet">
@@ -142,7 +143,7 @@
                     </li>
                     <li class="nav-menu-item" style="padding-left: 20px" sec:authorize="isAuthenticated()">
                         <a href="/profile">
-                            <i  class="la-address-card la"></i>
+                            <i class="la-address-card la"></i>
                             <span class="nav-menu-item-title">Жеке парақша</span>
                         </a>
                     </li>
@@ -154,20 +155,20 @@
                     </li>
                     <li class="nav-menu-item" style="padding-left: 20px">
                         <a href="/departments">
-                            <i  class="la-bezier-curve la"></i>
+                            <i class="la-bezier-curve la"></i>
                             <span class="nav-menu-item-title">Ұйымның құрылымы</span>
                         </a>
                     </li>
                     <li class="nav-menu-item" style="padding-left: 20px" sec:authorize="isAuthenticated()">
                         <a href="/calendar">
-                            <i  class="la-bezier-curve la"></i>
+                            <i class="la-bezier-curve la"></i>
                             <span class="nav-menu-item-title">Жұмыс кестесі</span>
                         </a>
                     </li>
                     <li class="nav-submenu" sec:authorize="isAuthenticated()">
                         <div class="nav-submenu-title">
                                 <span>
-                                     <i  class="la-chevron-right la"></i>
+                                     <i class="la-chevron-right la"></i>
                                     <span>Сұраныстар</span>
                                 </span>
                             <i class="nav-submenu-arrow caret-bottom"></i>
@@ -175,25 +176,25 @@
                         <ul class="nav-menu">
                             <li class="nav-menu-item">
                                 <a href="/my-suranistar">
-                                    <i  class="la-chevron-right la"></i>
+                                    <i class="la-chevron-right la"></i>
                                     <span class="nav-menu-item-title">Менің сұраныстарым</span>
                                 </a>
                             </li>
                             <li class="nav-menu-item">
                                 <a href="/archive-suranistar">
-                                    <i  class="la-chevron-right la"></i>
+                                    <i class="la-chevron-right la"></i>
                                     <span class="nav-menu-item-title">Архив</span>
                                 </a>
                             </li>
                             <li class="nav-menu-item">
                                 <a href="/dispatcher-suranistar">
-                                    <i  class="la-chevron-right la"></i>
+                                    <i class="la-chevron-right la"></i>
                                     <span class="nav-menu-item-title">Барлық сұраныстар</span>
                                 </a>
                             </li>
                             <li class="nav-menu-item" th:if="${i.role.name == 'MANAGER'}">
                                 <a href="/manager-suranistar">
-                                    <i  class="la-chevron-right la"></i>
+                                    <i class="la-chevron-right la"></i>
                                     <span class="nav-menu-item-title">Департамент сұраныстары</span>
                                 </a>
                             </li>
@@ -217,7 +218,6 @@
                             <span class="nav-menu-item-title">Сұрақ-жауап</span>
                         </a>
                     </li>
-
                 </ul>
             </div>
         </div>
@@ -274,62 +274,60 @@
 
         <!-- Content START -->
         <div class="content container">
+
             <div class="main">
-                <div class="page-header">
-                    <h4 class="page-title">Біз туралы</h4>
-                    <div class="breadcrumb">
-                        <span class="me-1 text-gray"><i class="feather icon-home"></i></span>
-                        <div class="breadcrumb-item"><a href="/">Басты бет </a></div>
-                        <div class="breadcrumb-item"><a href="#"> Біз туралы </a></div>
-                    </div>
-                </div>
-
-                <div class="card">
-                    <div class="card-body">
-                        <h4>Байланыc</h4>
-                        <div class="mt-4">
-                            <div class="card">
-                                <div class="card-body">
-                                    <p> Мекенжайымыз: Қазақстан Республикасы, 010000, Астана қаласы, Есіл ауданы, Д. Қонаев көшесі, 4 үй </p>
-                                    <p> Қабылдау бөлімі: +7 (7172) 757-500, +7 (7172) 757-600 (Астана)</p>
-                                    <p> Құжаттамалық қамтамасыз ету бөлімі (Канцелярия): +7 (7172) 757 575, astana@khabar.kz</p>
-                                    <p> Қызметкерлерді басқару бөлімі: +7 (7172) 757 495, +7 (7172) 757 660</p>
-                                    <p> Коммерциялық дирекция: +7 (7172) 757-555, +7 (7172) 757-556 </p>
-                                    <p> «Хабар» арнасының жаңалықтар қызметі: +7 (7172) 757 540, +7 (7172) 757 605 (Астана), +7 (7272) 700 122 (Алматы), astananews@khabar.kz </p>
-                                    <p> «Хабар 24» телеарнасы: +7 (7172) 757-485, +7 (7172) 757- 643 </p>
-                                    <p> EL ARNA телеарнасы: + 7 (7172) 70 10 97, +7 (7172) 70 10 69 </p>
-                                    <p> Жарнама бойынша: sales@khabar.kz</p>
-                                    <p> Алматы филиалы: Қазақстан Республикасы, 050013, Алматы қаласы, Желтоқсан көшесі, 185 үй</p>
-                                    <p> Қабылдау бөлімі: +7 (727) 2583-610 (Алматы), khabar@khabar.kz</p>
-                                </div>
+                <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link active" id="pills-home-tab" data-bs-toggle="pill"
+                                data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home"
+                                aria-selected="true">Күн
+                        </button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="pills-profile-tab" data-bs-toggle="pill"
+                                data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile"
+                                aria-selected="false">Апта
+                        </button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="pills-contact-tab" data-bs-toggle="pill"
+                                data-bs-target="#pills-contact" type="button" role="tab" aria-controls="pills-contact"
+                                aria-selected="false">Ай
+                        </button>
+                    </li>
+                </ul>
+                <div class="tab-content" id="pills-tabContent">
+                    <div class="tab-pane fade show active" id="pills-home" role="tabpanel"
+                         aria-labelledby="pills-home-tab">
+                        <div class="col">
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <tbody>
+                                    <tr th:each="item: ${calendar}">
+                                        <td th:text="${item.dateTime.getHour() + ':' + item.dateTime.getMinute()}" style="width: 10%;"></td>
+                                        <td th:text="${item.address}"></td>
+                                        <td th:text="${item.title}"></td>
+                                        <td><a th:href="@{'/suranis?id=' + ${item.suranisId}}">Сұранысқа өту</a></td>
+                                    </tr>
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
                     </div>
-                </div>
-
-                <div class="card">
-                    <div class="card-body">
-                        <h4>«Хабар» Агенттігі» АҚ «Сенім телефоны»:</h4>
-                        <div class="mt-4">
-                            <div class="card" style="max-width: 600px">
-                                <div class="card-body">
-                                    <p>
-                                        Жеке тұлғаларды және заңды тұлғалардың өкілдерін жеке қабылдау мәселелері, сондай-ақ өтініштер мен сұрау салуларды қарау нәтижелері бойынша шешімдерге және (немесе) әрекеттерге (әрекетсіздікке) шағымдану тәртібін қоса алғанда, өтініштер мен сұрау салуларды қарау мәселелері бойынша ақпаратты көрсетілген байланыс деректері арқылы ала аласыз:
-                                    </p>
-                                    <p>
-                                        Сафурина Райгуль Амиржановна – тел. +7 (717)2 75-75-75, е-mail: r.safurina@khabar.kz
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
+                    <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
+                        ...
+                    </div>
+                    <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">
+                        ...
                     </div>
                 </div>
-
             </div>
+
             <!-- Footer START -->
             <div class="footer">
                 <div class="footer-content">
-                    <p class="mb-0">Copyright © 2023 Дипломдық жоба. Барлық құқықтар қорғалған Қазақ Ұлттық Университеті. </p>
+                    <p class="mb-0">Copyright © 2023 Дипломдық жоба. Барлық құқықтар қорғалған Қазақ Ұлттық
+                        Университеті. </p>
                 </div>
             </div>
             <!-- Footer End -->
@@ -360,6 +358,8 @@
 <script src="assets/js/vendors.min.js"></script>
 
 <!-- page js -->
+<script src="assets/vendors/fullcalendar/lib/main.min.js"></script>
+<script src="assets/js/pages/calendar.js"></script>
 
 <!-- Core JS -->
 <script src="assets/js/app.min.js"></script>

@@ -65,6 +65,8 @@ public class InitData implements CommandLineRunner {
                         .password(passwordEncoder.encode(password))
                         .role(role)
                         .department(department)
+                        .locked(false)
+                        .enabled(true)
                         .build();
                 EmployeeInfo employeeInfo = EmployeeInfo.builder()
                         .name(data[3])
@@ -88,6 +90,8 @@ public class InitData implements CommandLineRunner {
                 .email("admin@gmail.com")
                 .password(passwordEncoder.encode("100"))
                 .role(roleRepository.findByName("ADMIN"))
+                .enabled(true)
+                .locked(false)
                 .build();
         if (!userRepository.existsByEmail(admin.getUsername())) {
             userRepository.save(admin);

@@ -7,7 +7,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
-// кіру, тіркелу, пароль ұмыту
 @Controller
 @AllArgsConstructor
 public class LoginController {

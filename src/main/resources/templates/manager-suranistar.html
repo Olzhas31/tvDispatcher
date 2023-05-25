@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Біздің арна туралы ақпарат</title>
+    <title>Департамент сұраныстары</title>
 
     <!-- Favicon -->
     <link rel="shortcut icon" href="assets/images/logo/favicon.ico">
@@ -217,7 +217,6 @@
                             <span class="nav-menu-item-title">Сұрақ-жауап</span>
                         </a>
                     </li>
-
                 </ul>
             </div>
         </div>
@@ -276,51 +275,58 @@
         <div class="content container">
             <div class="main">
                 <div class="page-header">
-                    <h4 class="page-title">Біз туралы</h4>
+                    <h4 class="page-title">Сұраныстар</h4>
                     <div class="breadcrumb">
                         <span class="me-1 text-gray"><i class="feather icon-home"></i></span>
-                        <div class="breadcrumb-item"><a href="/">Басты бет </a></div>
-                        <div class="breadcrumb-item"><a href="#"> Біз туралы </a></div>
+                        <div class="breadcrumb-item"><a href="/"> Басты бет </a></div>
+                        <div class="breadcrumb-item"><a href="#"> Сұраныстар </a></div>
+                        <div class="breadcrumb-item"><a href="/dispatcher-suranistar"> Департамент сұраныстары</a></div>
                     </div>
                 </div>
 
                 <div class="card">
-                    <div class="card-body">
-                        <h4>Байланыc</h4>
-                        <div class="mt-4">
-                            <div class="card">
-                                <div class="card-body">
-                                    <p> Мекенжайымыз: Қазақстан Республикасы, 010000, Астана қаласы, Есіл ауданы, Д. Қонаев көшесі, 4 үй </p>
-                                    <p> Қабылдау бөлімі: +7 (7172) 757-500, +7 (7172) 757-600 (Астана)</p>
-                                    <p> Құжаттамалық қамтамасыз ету бөлімі (Канцелярия): +7 (7172) 757 575, astana@khabar.kz</p>
-                                    <p> Қызметкерлерді басқару бөлімі: +7 (7172) 757 495, +7 (7172) 757 660</p>
-                                    <p> Коммерциялық дирекция: +7 (7172) 757-555, +7 (7172) 757-556 </p>
-                                    <p> «Хабар» арнасының жаңалықтар қызметі: +7 (7172) 757 540, +7 (7172) 757 605 (Астана), +7 (7272) 700 122 (Алматы), astananews@khabar.kz </p>
-                                    <p> «Хабар 24» телеарнасы: +7 (7172) 757-485, +7 (7172) 757- 643 </p>
-                                    <p> EL ARNA телеарнасы: + 7 (7172) 70 10 97, +7 (7172) 70 10 69 </p>
-                                    <p> Жарнама бойынша: sales@khabar.kz</p>
-                                    <p> Алматы филиалы: Қазақстан Республикасы, 050013, Алматы қаласы, Желтоқсан көшесі, 185 үй</p>
-                                    <p> Қабылдау бөлімі: +7 (727) 2583-610 (Алматы), khabar@khabar.kz</p>
-                                </div>
-                            </div>
-                        </div>
+                    <div class="card-header">
+                        <h4 class="card-title">Департамент сұраныстары</h4>
                     </div>
-                </div>
-
-                <div class="card">
                     <div class="card-body">
-                        <h4>«Хабар» Агенттігі» АҚ «Сенім телефоны»:</h4>
                         <div class="mt-4">
-                            <div class="card" style="max-width: 600px">
-                                <div class="card-body">
-                                    <p>
-                                        Жеке тұлғаларды және заңды тұлғалардың өкілдерін жеке қабылдау мәселелері, сондай-ақ өтініштер мен сұрау салуларды қарау нәтижелері бойынша шешімдерге және (немесе) әрекеттерге (әрекетсіздікке) шағымдану тәртібін қоса алғанда, өтініштер мен сұрау салуларды қарау мәселелері бойынша ақпаратты көрсетілген байланыс деректері арқылы ала аласыз:
-                                    </p>
-                                    <p>
-                                        Сафурина Райгуль Амиржановна – тел. +7 (717)2 75-75-75, е-mail: r.safurina@khabar.kz
-                                    </p>
-                                </div>
-                            </div>
+                            <table id="data-table" class="table data-table">
+                                <thead>
+                                <tr>
+                                    <th>Id</th>
+                                    <th>Тақырып</th>
+                                    <th>Автор</th>
+                                    <th>Құрылған уақыты</th>
+                                    <th>Статус</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr th:each="suranis : ${suranistar}">
+                                    <td th:text="${suranis.id}"></td>
+                                    <td><a th:href="@{'/suranis?id=' + ${suranis.id}}" th:text="${suranis.title}"></a></td>
+                                    <td><span th:text="${suranis.name}"></span></td>
+                                    <td><span th:text="${suranis.createdTime}"></span></td>
+                                    <td>
+                                        <div class="d-flex align-items-center text-success">
+                                            <span class="badge-dot me-2 bg-success"></span>
+                                            <span class="text-capitalize" th:text="${suranis.status}"></span>
+                                        </div>
+                                    </td>
+                                    <td>
+
+                                    </td>
+                                </tr>
+                                </tbody>
+                                <tfoot>
+                                <tr>
+                                    <th>Id</th>
+                                    <th>Тақырып</th>
+                                    <th>Автор</th>
+                                    <th>Құрылған уақыты</th>
+                                    <th>Статус</th>
+                                </tr>
+                                </tfoot>
+                            </table>
                         </div>
                     </div>
                 </div>

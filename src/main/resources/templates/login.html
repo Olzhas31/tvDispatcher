@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Espire - Admin Dashboard Template</title>
+    <title>Ақпараттық жүйеге кіру</title>
 
     <!-- Favicon -->
     <link rel="shortcut icon" href="assets/images/logo/favicon.ico">
@@ -43,6 +43,12 @@
                             </div>
                             <div class="mb-3 alert alert-danger" th:if="${param.error}">
                                 <span th:text="${'Қолданушы аты немесе құпиясөз дұрыс енгізілмеді'}"></span>
+                            </div>
+                            <div class="mb-3 alert alert-danger" th:if="${param.blocked}">
+                                <span th:text="${'Сіздің аккаунт администратормен бұғатталған'}"></span>
+                            </div>
+                            <div class="mb-3 alert alert-danger" th:if="${param.notEnabled}">
+                                <span th:text="${'Сіздің аккаунт әлі қосылмаған'}"></span>
                             </div>
                             <div class="mb-3 alert alert-primary" th:if="${param.logout}">
                                 <span th:text="${'Сіз жүйеден шықтыңыз'}"></span>

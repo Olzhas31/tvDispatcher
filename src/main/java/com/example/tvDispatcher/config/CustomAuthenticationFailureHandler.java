@@ -16,6 +16,9 @@ public class CustomAuthenticationFailureHandler implements AuthenticationFailure
 
         if (exception.getMessage().equals("blocked")) {
             response.sendRedirect("/login?blocked");
+        } else if (exception.getMessage().equals("notEnabled")) {
+            System.out.println("not enabled in handler");
+            response.sendRedirect("/login?notEnabled");
         } else if (exception.getMessage().equals("Bad credentials")) {
             response.sendRedirect("/login?error");
         }

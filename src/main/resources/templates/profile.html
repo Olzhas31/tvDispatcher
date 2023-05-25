@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Espire - Admin Dashboard Template</title>
+    <title>Жеке парақша</title>
 
     <!-- Favicon -->
     <link rel="shortcut icon" href="assets/images/logo/favicon.ico">
@@ -35,12 +35,95 @@
                     </div>
                 </div>
                 <div class="header-nav-right">
-                    <div class="header-nav-item">
-                        <div class="header-nav-item-select">
-                            <div class="toggle-wrapper" data-bs-toggle="modal" data-bs-target="#quick-view">
-                                <i class="nav-icon feather icon-settings"></i>
+                    <div class="header-nav-item" sec:authorize="isAuthenticated()">
+                        <div class="dropdown header-nav-item-select nav-notification">
+                            <div class="toggle-wrapper" id="nav-notification-dropdown" data-bs-toggle="dropdown">
+                                <i class="header-nav-item-select nav-icon feather icon-bell"></i>
+                            </div>
+                            <div class="dropdown-menu dropdown-menu-end">
+                                <div class="nav-notification-header">
+                                    <h5 class="mb-0">Хабарламалар</h5>
+                                    <!--                                    <a href="#" class="font-size-sm">Барлығы оқылды</a>-->
+                                </div>
+                                <div class="nav-notification-body">
+                                    <div class="nav-notification-item " th:each="notification : ${notifications}">
+                                        <div class="bg-primary feather font-size-lg icon-info avatar avatar-circle" style="width: 40px; height: 40px; line-height: 40px;">                                            </div>
+                                        <div class="ms-2">
+                                                <span>
+                                                    <span class="fw-bolder text-dark"> </span>
+                                                    <span th:text="${notification.content}"></span>
+                                                </span>
+                                            <div class="font-size-sm fw-bold mt-1">
+                                                <i class="feather icon-clock"></i>
+                                                <span class="ms-1" th:text="${notification.createdTime}"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="nav-notification-footer">
+                                    <a href="/notifications" class="font-size-sm">Барлығын көру</a>
+                                </div>
                             </div>
                         </div>
+                    </div>
+
+                    <div class="header-nav-item" sec:authorize="isAuthenticated()" th:if="${i.role.name != 'ADMIN'}">
+                        <div class="dropdown header-nav-item-select nav-profile">
+                            <div class="toggle-wrapper" id="nav-profile-dropdown" data-bs-toggle="dropdown">
+                                <div class="avatar avatar-text bg-primary" th:if="${i.role.name == 'MANAGER'}">
+                                    <span th:text="${i.info.surname.charAt(0) + '' + i.info.name.charAt(0)}"></span>
+                                </div>
+                                <div class="avatar avatar-text bg-success" th:if="${i.role.name != 'MANAGER'}">
+                                    <span th:text="${i.info.surname.charAt(0) + '' + i.info.name.charAt(0)}"></span>
+                                </div>
+                                <span class="fw-bold mx-1"
+                                      th:text="${i.info.surname + ' ' + i.info.name}"> </span>
+                                <i class="feather icon-chevron-down"></i>
+                            </div>
+                            <div class="dropdown-menu dropdown-menu-end">
+                                <div class="nav-profile-header">
+                                    <div class="d-flex align-items-center">
+                                        <div class="avatar avatar-text bg-primary" th:if="${i.role.name == 'MANAGER'}">
+                                            <span th:text="${i.info.surname.charAt(0) + '' + i.info.name.charAt(0)}"></span>
+                                        </div>
+                                        <div class="avatar avatar-text bg-success" th:if="${i.role.name != 'MANAGER'}">
+                                            <span th:text="${i.info.surname.charAt(0) + '' + i.info.name.charAt(0)}"></span>
+                                        </div>
+                                        <div class="d-flex flex-column ms-1">
+                                            <span class="fw-bold text-dark"
+                                                  th:text="${i.info.surname + ' ' + i.info.name}"></span>
+                                            <span class="font-size-sm"
+                                                  th:text="${i.email}"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <a href="/profile" class="dropdown-item">
+                                    <div class="d-flex align-items-center">
+                                        <i class="font-size-lg me-2 feather icon-user"></i>
+                                        <span>Жеке кабинет</span>
+                                    </div>
+                                </a>
+                                <a href="/edit-profile" class="dropdown-item">
+                                    <div class="d-flex align-items-center">
+                                        <i class="font-size-lg me-2 feather icon-settings"></i>
+                                        <span>Жеке деректерді өзгерту</span>
+                                    </div>
+                                </a>
+                                <a href="/logout" class="dropdown-item">
+                                    <div class="d-flex align-items-center"><i class="font-size-lg me-2 feather icon-power"></i>
+                                        <span>Шығу</span>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="header-nav-item" sec:authorize="isAnonymous()">
+                        <a class="btn btn-primary" href="/login" role="button">Кіру</a>
+                    </div>
+
+                    <div class="header-nav-item" sec:authorize="isAnonymous()" style="padding-left: 20px">
+                        <a class="btn btn-primary" href="/register" role="button">Тіркелу</a>
                     </div>
                 </div>
             </div>
@@ -48,7 +131,7 @@
         <!-- Header END -->
 
         <!-- Header Navbar START -->
-        <div class="header-navbar nav-menu-light">
+        <div class="header-navbar nav-menu-light" th:if="${i.role.name != 'ADMIN'}">
             <div class="container">
                 <ul class="nav-menu nav-menu-horizontal">
                     <li class="nav-menu-item">
@@ -57,22 +140,34 @@
                             <span class="nav-menu-item-title">Басты бет</span>
                         </a>
                     </li>
-                    <li class="nav-menu-item" style="padding-left: 20px">
+                    <li class="nav-menu-item" style="padding-left: 20px" sec:authorize="isAuthenticated()">
                         <a href="/profile">
-                            <i class="feather icon-home"></i>
-                            <span class="nav-menu-item-title">Жеке кабинет</span>
+                            <i  class="la-address-card la"></i>
+                            <span class="nav-menu-item-title">Жеке парақша</span>
+                        </a>
+                    </li>
+                    <li class="nav-menu-item" style="padding-left: 20px">
+                        <a href="/programs">
+                            <i class="icon-layers feather"></i>
+                            <span class="nav-menu-item-title">Бағдарлама</span>
                         </a>
                     </li>
                     <li class="nav-menu-item" style="padding-left: 20px">
                         <a href="/departments">
-                            <i class="feather icon-home"></i>
+                            <i  class="la-bezier-curve la"></i>
                             <span class="nav-menu-item-title">Ұйымның құрылымы</span>
                         </a>
                     </li>
-                    <li class="nav-submenu">
+                    <li class="nav-menu-item" style="padding-left: 20px" sec:authorize="isAuthenticated()">
+                        <a href="/calendar">
+                            <i  class="la-bezier-curve la"></i>
+                            <span class="nav-menu-item-title">Жұмыс кестесі</span>
+                        </a>
+                    </li>
+                    <li class="nav-submenu" sec:authorize="isAuthenticated()">
                         <div class="nav-submenu-title">
                                 <span>
-                                    <i class="feather icon-grid"></i>
+                                     <i  class="la-chevron-right la"></i>
                                     <span>Сұраныстар</span>
                                 </span>
                             <i class="nav-submenu-arrow caret-bottom"></i>
@@ -80,34 +175,71 @@
                         <ul class="nav-menu">
                             <li class="nav-menu-item">
                                 <a href="/my-suranistar">
-                                    <i class="feather icon-home"></i>
+                                    <i  class="la-chevron-right la"></i>
                                     <span class="nav-menu-item-title">Менің сұраныстарым</span>
                                 </a>
                             </li>
                             <li class="nav-menu-item">
                                 <a href="/archive-suranistar">
-                                    <i class="feather icon-home"></i>
-                                    <span class="nav-menu-item-title">Менің сұраныстарым (Архив)</span>
+                                    <i  class="la-chevron-right la"></i>
+                                    <span class="nav-menu-item-title">Архив</span>
                                 </a>
                             </li>
                             <li class="nav-menu-item">
                                 <a href="/dispatcher-suranistar">
-                                    <i class="feather icon-home"></i>
+                                    <i  class="la-chevron-right la"></i>
                                     <span class="nav-menu-item-title">Барлық сұраныстар</span>
                                 </a>
                             </li>
-                            <li class="nav-menu-item">
+                            <li class="nav-menu-item" th:if="${i.role.name == 'MANAGER'}">
                                 <a href="/manager-suranistar">
-                                    <i class="feather icon-home"></i>
+                                    <i  class="la-chevron-right la"></i>
                                     <span class="nav-menu-item-title">Департамент сұраныстары</span>
                                 </a>
                             </li>
                         </ul>
                     </li>
-                    <li class="nav-menu-item">
+                    <li class="nav-menu-item" style="padding-left: 20px">
+                        <a href="/new-suranis">
+                            <i class="icon-file-plus feather"></i>
+                            <span class="nav-menu-item-title">Сұраныс құру</span>
+                        </a>
+                    </li>
+                    <li class="nav-menu-item" style="padding-left: 20px">
                         <a href="/about-us">
-                            <i class="feather icon-home"></i>
+                            <i class="icon-tv feather"></i>
                             <span class="nav-menu-item-title">Біз туралы</span>
+                        </a>
+                    </li>
+                    <li class="nav-menu-item" style="padding-left: 20px">
+                        <a href="/faq">
+                            <i class="icon-help-circle feather"></i>
+                            <span class="nav-menu-item-title">Сұрақ-жауап</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="header-navbar nav-menu-light" sec:authorize="hasAuthority('ADMIN')">
+            <div class="container">
+                <ul class="nav-menu nav-menu-horizontal">
+                    <li class="nav-menu-item">
+                        <a href="/">
+                            <i class="icon-users feather"></i>
+                            <span class="nav-menu-item-title">Барлық қолданушылар</span>
+                        </a>
+                    </li>
+                    <li class="nav-menu-item" style="padding-left: 20px" sec:authorize="isAuthenticated()">
+                        <a href="/admin-new-users">
+                            <i class="icon-user-plus feather"></i>
+                            <span class="nav-menu-item-title">Жаңа қолданушылар</span>
+                        </a>
+                    </li>
+                    <li class="nav-menu-item" style="padding-left: 20px">
+                        <a href="/departments">
+                            <i  class="la-bezier-curve la"></i>
+                            <span class="nav-menu-item-title">Ұйымның құрылымы</span>
                         </a>
                     </li>
                 </ul>
@@ -189,20 +321,20 @@
                                     <div class="row">
                                         <div class="col" style="max-width: 200px;">
                                             <div class="mb-3">
-                                                <img class="img-fluid w-100 rounded" src="assets/images/avatars/thumb-1.jpg" alt="upload avatar">
+                                                <img class="img-fluid w-100 rounded" src="assets/images/user.png" alt="upload avatar">
                                             </div>
                                             <div class="upload upload-text w-100">
-                                                <div>
-                                                    <label for="upload" class="btn btn-secondary w-100">Сурет өзгерту</label>
-                                                </div>
+<!--                                                <div>-->
+<!--                                                    <label for="upload" class="btn btn-secondary w-100">Сурет өзгерту</label>-->
+<!--                                                </div>-->
                                                 <input id="upload" type="file" name="file" class="upload-input" accept="image/png, image/jpeg">
                                             </div>
                                             <div class="mb-3" th:if="${i.id == user.id}" style="padding-top: 10px">
                                                 <a class="btn btn-primary" href="/edit-profile" role="button">Жеке мәліметтерді өзгерту</a>
                                             </div>
-                                            <div class="mb-3" th:if="${i.id == user.id}" style="padding-top: 10px">
-                                                <a class="btn btn-primary" href="/edit-password" role="button">Құпия сөзді өзгерту</a>
-                                            </div>
+<!--                                            <div class="mb-3" th:if="${i.id == user.id}" style="padding-top: 10px">-->
+<!--                                                <a class="btn btn-primary" href="/edit-password" role="button">Құпия сөзді өзгерту</a>-->
+<!--                                            </div>-->
                                         </div>
                                         <div class="col-md">
                                             <table class="table">

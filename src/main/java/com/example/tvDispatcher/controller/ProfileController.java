@@ -3,6 +3,7 @@ package com.example.tvDispatcher.controller;
 import com.example.tvDispatcher.entity.User;
 import com.example.tvDispatcher.model.UserUpdateRequest;
 import com.example.tvDispatcher.service.IDepartmentService;
+import com.example.tvDispatcher.service.INotificationService;
 import com.example.tvDispatcher.service.IRoleService;
 import com.example.tvDispatcher.service.IUserService;
 import lombok.AllArgsConstructor;
@@ -13,7 +14,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-// Тек профильге байланысты іс-әрекеттер
 @Controller
 @AllArgsConstructor
 public class ProfileController {
@@ -21,6 +21,8 @@ public class ProfileController {
     private final IUserService userService;
     private final IDepartmentService departmentService;
     private final IRoleService roleService;
+    private final INotificationService notificationService;
+    private final Integer limit = 5;
 
     @GetMapping("/profile")
     public String profile(Authentication authentication,
@@ -32,6 +34,8 @@ public class ProfileController {
         if (id != null) {
             user = userService.getById(id);
         }
+
+        model.addAttribute("notifications", notificationService.getNotificationsByUserAndLimit(user, limit));
         model.addAttribute("user", user);
         return "profile";
     }
@@ -45,10 +49,12 @@ public class ProfileController {
             departmentId = user.getDepartment().getId();
         }
 
+        model.addAttribute("i", user);
         model.addAttribute("user", user);
         model.addAttribute("departmentId", departmentId);
         model.addAttribute("departments", departmentService.getAll());
         model.addAttribute("roles", roleService.findAllWithoutAdmin());
+        model.addAttribute("notifications", notificationService.getNotificationsByUserAndLimit(user, limit));
         return "edit-profile";
     }
 
