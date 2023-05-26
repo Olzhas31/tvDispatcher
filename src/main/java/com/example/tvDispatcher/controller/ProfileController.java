@@ -65,8 +65,18 @@ public class ProfileController {
     }
 
     @GetMapping("/edit-password")
-    public String showUpdatePassword() {
+    public String showUpdatePassword(Authentication authentication, Model model) {
+        User user = (User) authentication.getPrincipal();
+        model.addAttribute("notifications", notificationService.getNotificationsByUserAndLimit(user, limit));
+        model.addAttribute("i", user);
         return "edit-password";
+    }
+
+    @PostMapping("/edit-password")
+    public String updatePassword(Authentication authentication, String password) {
+        User user = (User) authentication.getPrincipal();
+        userService.updatePassword(user, password);
+        return "redirect:/logout";
     }
 
 }

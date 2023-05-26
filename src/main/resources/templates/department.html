@@ -406,9 +406,15 @@
                                         <span th:text="${user.username}"></span>
                                     </td>
                                     <td>
-                                        <div class="d-flex align-items-center text-success">
+                                        <div th:if="${user.locked == false}"
+                                             class="d-flex align-items-center text-success">
                                             <span class="badge-dot me-2 bg-success"></span>
-                                            <span class="text-capitalize">active</span>
+                                            <span class="text-capitalize">Активті</span>
+                                        </div>
+                                        <div th:if="${user.locked == true}"
+                                             class="d-flex align-items-center text-danger">
+                                            <span class="badge-dot me-2 bg-danger"></span>
+                                            <span class="text-capitalize">Бұғатталған</span>
                                         </div>
                                     </td>
                                 </tr>

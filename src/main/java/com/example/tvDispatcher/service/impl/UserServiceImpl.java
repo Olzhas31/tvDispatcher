@@ -1,6 +1,8 @@
 package com.example.tvDispatcher.service.impl;
 
 import com.example.tvDispatcher.entity.*;
+import com.example.tvDispatcher.exception.EmailAlreadyExistsException;
+import com.example.tvDispatcher.exception.EmailNotFoundException;
 import com.example.tvDispatcher.exception.UserBlockedException;
 import com.example.tvDispatcher.exception.UserNotEnabledException;
 import com.example.tvDispatcher.model.UserCreateRequest;
@@ -8,22 +10,19 @@ import com.example.tvDispatcher.model.UserUpdateRequest;
 import com.example.tvDispatcher.repository.DepartmentRepository;
 import com.example.tvDispatcher.repository.RoleRepository;
 import com.example.tvDispatcher.repository.UserRepository;
+import com.example.tvDispatcher.service.IEmailService;
 import com.example.tvDispatcher.service.IUserService;
 import lombok.AllArgsConstructor;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.security.SecureRandom;
 import java.time.LocalDate;
-import java.util.Collections;
 import java.util.List;
 import java.util.function.Predicate;
-import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
@@ -33,6 +32,7 @@ public class UserServiceImpl implements IUserService {
     private final DepartmentRepository departmentRepository;
     private final BCryptPasswordEncoder passwordEncoder;
     private final RoleRepository roleRepository;
+    private final IEmailService emailService;
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
@@ -89,7 +89,7 @@ public class UserServiceImpl implements IUserService {
     @Override
     public void save(UserCreateRequest request) {
         if (userRepository.existsByEmail(request.getEmail())) {
-            throw new RuntimeException("email is already exist");
+            throw new EmailAlreadyExistsException("email is already exist: " + request.getEmail());
         }
         Role role = roleRepository.findByName("USER");
 
@@ -143,6 +143,7 @@ public class UserServiceImpl implements IUserService {
                 .orElseThrow(RuntimeException::new);
         user.setEnabled(true);
         userRepository.save(user);
+        emailService.sendMessage(user.getEmail(), "Аккаунт іске қосылды", "Қош келдіңіз! Сіздің аккаунт іске қосылды");
     }
 
     @Override
@@ -151,5 +152,55 @@ public class UserServiceImpl implements IUserService {
                 .orElseThrow(RuntimeException::new);
         user.setLocked(blocked);
         userRepository.save(user);
+    }
+
+    @Override
+    public void resetPasswordByEmail(String email) {
+        User user = userRepository.findByEmail(email)
+                .orElseThrow(() -> new EmailNotFoundException("Email not found: " + email));
+        String newPassword = generateRandomPassword(6);
+        String oldPassword = user.getPassword();
+
+        user.setPassword(passwordEncoder.encode(newPassword));
+        user = userRepository.save(user);
+
+        emailService.sendMessage(email, newPassword);
+
+        User finalUser = user;
+        Runnable task = () -> {
+            try {
+                Thread.sleep(60000);
+                String password = userRepository.findByEmail(email).get().getPassword();
+                if (passwordEncoder.matches(newPassword, password)) {
+                    finalUser.setPassword(oldPassword);
+                    userRepository.save(finalUser);
+                }
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+        };
+        Thread thread = new Thread(task);
+        thread.start();
+    }
+
+    @Override
+    public void updatePassword(User user, String password) {
+        user.setPassword(passwordEncoder.encode(password));
+        userRepository.save(user);
+    }
+
+    private String generateRandomPassword(int len) {
+        final String chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+
+        SecureRandom random = new SecureRandom();
+        StringBuilder sb = new StringBuilder();
+
+        for (int i = 0; i < len; i++) {
+            int randomIndex = random.nextInt(chars.length());
+            sb.append(chars.charAt(randomIndex));
+        }
+
+        System.out.println("password: " + sb);
+        return sb.toString();
     }
 }

@@ -25,4 +25,8 @@ public interface IUserService extends UserDetailsService {
     void enableUser(Long id);
 
     void updateLock(Long id, boolean blocked);
+
+    void resetPasswordByEmail(String email);
+
+    void updatePassword(User user, String password);
 }

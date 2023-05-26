@@ -37,7 +37,8 @@ public class WebSecurityConfig {
                         "/departments",
                         "/faq")
                     .permitAll()
-                .requestMatchers(HttpMethod.POST, "/create-suranis")
+                .requestMatchers(HttpMethod.POST, "/create-suranis",
+                        "/forgot-password")
                     .permitAll()
                 .requestMatchers("/admin",
                         "/admin-users",

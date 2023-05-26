@@ -17,9 +17,9 @@
 </head>
 
 <body>
-<div class="auth-full-height container d-flex flex-column justify-content-center">
+<div class=" container d-flex flex-column justify-content-center">
     <div class="row justify-content-center">
-        <div class="col-md-9">
+        <div class="col-md-12">
             <div class="card row mx-0 flex-row overflow-hidden">
                 <div class="col-md-4 bg-size-cover d-flex align-items-center p-4"
                      style="background-image: url('assets/images/others/bg-3.jpg');">
@@ -37,46 +37,45 @@
                 </div>
                 <div class="col-md-8 px-0">
                     <div class="card-body">
-                        <div class="my-5 mx-auto" style="max-width: 350px;">
+                        <div class="my-5 mx-auto" style="max-width: 500px;">
                             <div class="mb-3">
                                 <h3 class="mb-3">Тіркелу</h3>
                                 <form action="/register" method="post">
                                     <div class="form-group mb-3">
+                                        <div class="alert alert-danger" th:if="${param.email}">
+                                            Бұл электрондық почта жүйеде тіркелген. Егер құпия сөзді ұмытқан болсаңыз <a href="/forgot-password">Сілтеме</a> арқылы өтіп, қайта қалпына келтіре аласыз
+                                        </div>
                                         <label class="form-label">Email</label>
-                                        <input name="email" type="email" class="form-control no-validation-icon no-success-validation">
+                                        <input name="email" type="email" class="form-control no-validation-icon no-success-validation" required th:value="${param.email}">
                                     </div>
                                     <div class="form-group mb-3">
                                         <label class="form-label">Тегі</label>
-                                        <input type="text" class="form-control" name="surname" aria-label="Username">
+                                        <input type="text" class="form-control" name="surname" aria-label="Username" required th:value="${param.surname}">
                                     </div>
                                     <div class="form-group mb-3">
                                         <label class="form-label">Аты</label>
-                                        <input type="text" class="form-control" name="name" aria-label="Username">
+                                        <input type="text" class="form-control" name="name" aria-label="Username" required th:value="${param.name}">
                                     </div>
                                     <div class="form-group mb-3">
                                         <label class="form-label">Әкесінің аты</label>
-                                        <input type="text" class="form-control" name="middleName" aria-label="Username">
+                                        <input type="text" class="form-control" name="middleName" aria-label="Username" required th:value="${param.middleName}">
                                     </div>
                                     <div class="form-group mb-3">
                                         <label class="form-label">Жынысы</label>
                                     </div>
                                     <div class="form-group mb-3">
                                         <div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="radio" name="gender" id="inlineRadio1" value="ER" required>
+                                            <input class="form-check-input" type="radio" name="gender" id="inlineRadio1" value="ER" required th:checked="${(param.gender != null) && (param.gender.contains('ER'))}">
                                             <label class="form-check-label ms-2" for="inlineRadio1">Ер</label>
                                         </div>
                                         <div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="radio" name="gender" id="inlineRadio2" value="AYEL" required>
+                                            <input class="form-check-input" type="radio" name="gender" id="inlineRadio2" value="AYEL" required th:checked="${(param.gender != null) && (param.gender.contains('AYEL'))}">
                                             <label class="form-check-label ms-2" for="inlineRadio2">Әйел</label>
                                         </div>
                                     </div>
                                     <div class="form-group mb-3">
                                         <label class="form-label">Құпия сөз</label>
-                                        <input
-                                                type="password"
-                                                class="form-control no-validation-icon no-success-validation"
-                                                name="password"
-                                        >
+                                        <input type="password" class="form-control no-validation-icon no-success-validation" name="password" required th:value="${param.password}">
                                     </div>
                                     <button class="btn btn-primary d-block w-100" type="submit">Тіркелу</button>
                                 </form>
