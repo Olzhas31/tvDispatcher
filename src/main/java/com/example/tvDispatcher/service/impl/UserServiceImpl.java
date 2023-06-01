@@ -143,7 +143,7 @@ public class UserServiceImpl implements IUserService {
                 .orElseThrow(RuntimeException::new);
         user.setEnabled(true);
         userRepository.save(user);
-        emailService.sendMessage(user.getEmail(), "Аккаунт іске қосылды", "Қош келдіңіз! Сіздің аккаунт іске қосылды");
+        emailService.sendMessage(user.getEmail(), "Аккаунт іске қосылды", "Qosh keldiniz! Sizdin account iske qosildy");
     }
 
     @Override

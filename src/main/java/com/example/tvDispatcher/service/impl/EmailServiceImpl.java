@@ -20,8 +20,8 @@ public class EmailServiceImpl implements IEmailService {
         MimeMessageHelper helper = null;
         try {
             helper = new MimeMessageHelper(message, true, "utf-8");
-            message.setContent("Ақпаттық жүйедегі құпия сөз өзгерді. Егер сіз өзгертпеген болсаңыз бұл хабарламаны елемесеңіз болады! <br>" +
-                    "Жаңа құпия сөз: " + newPassword, "text/html");
+            message.setContent("Aqparattyq juiedegi qupia soz ozgertildi. Eger siz qupia sozdi ozgertpegen bolsanyz eshqandai areket jasamasaniz bolady. <br>" +
+                    "Jana qupia soz: " + newPassword, "text/html");
             helper.setTo(email);
             helper.setSubject("Құпия сөз өзгерді");
         } catch (MessagingException e) {

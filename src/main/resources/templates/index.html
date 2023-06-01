@@ -16,16 +16,19 @@
 
 </head>
 
-<body>
+<body style="background-image: url(https://tengrinews.kz/userdata/news/2022/news_476744/thumb_m/photo_405630.jpeg);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;">
 <div class="layout">
     <div class="horizontal-layout">
         <!-- Header START -->
-        <div class="header-text-dark header-nav layout-horizon">
+        <div class="header-text-dark header-nav layout-horizon" style="background: #023848">
             <div class="header-nav-wrap container">
                 <div class="header-nav-left">
                     <div class="nav-logo">
                         <div class="w-100 logo">
-                            <img class="img-fluid" src="assets/images/logo/logo.png" style="max-height: 70px;" alt="logo">
+                            <img class="logo__img" src="https://jjtv.kz/newdesign/img/Group17.png" srcset="https://jjtv.kz/newdesign/img/Group17.png 1x, /img/logo_default@2x.png 2x" alt="logo" style="max-height: 70px;">
                         </div>
                     </div>
                     <div class="header-nav-item mobile-toggle">
@@ -173,7 +176,7 @@
                             <i class="nav-submenu-arrow caret-bottom"></i>
                         </div>
                         <ul class="nav-menu">
-                            <li class="nav-menu-item">
+                            <li class="nav-menu-item" th:if="${(i.role.name == 'JURGIZYSHI') || (i.role.name == 'OPERATOR') || (i.role.name == 'TILSHI')}">
                                 <a href="/my-suranistar">
                                     <i  class="la-chevron-right la"></i>
                                     <span class="nav-menu-item-title">Менің сұраныстарым</span>
@@ -277,7 +280,7 @@
                 <span>Сіздің сұраныс сәтті құрылды. Жауап күтіңіз!</span>
             </div>
 
-            <div class="main">
+            <div class="main" style="background: #bfe6ffcc;">
                 <div class="page-header">
 <!--                    <h4 class="page-title">Pricing</h4>-->
 <!--                    <div class="breadcrumb">-->
@@ -289,7 +292,7 @@
                 </div>
                 <div class="container">
                     <div class="text-center mt-4">
-                        <h3 class="mb-3">Арнаға қош келдіңіз</h3>
+                        <span class="display-2">Біздің арнаға қош келдіңіз</span>
                     </div>
                     <div class="row mt-5">
                         <div class="col-md-4">
@@ -381,7 +384,7 @@
                 <div class="card">
                     <div class="card-body">
                         <h4>Таңдаулы тележобалар</h4>
-                        <div class="mt-4 mx-auto" style="max-width: 400px">
+                        <div class="mt-4 mx-auto">
                             <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
                                 <div class="carousel-indicators">
                                     <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
@@ -394,25 +397,25 @@
                                 </div>
                                 <div class="carousel-inner">
                                     <div class="carousel-item active">
-                                        <img src="assets/images/programs/test.jpg" class="d-block w-100" alt="...">
+                                        <img src="assets/images/programs/a1.webp" class="d-block w-100" alt="...">
                                     </div>
                                     <div class="carousel-item">
-                                        <img src="assets/images/programs/2.jpg" class="d-block w-100" alt="...">
+                                        <img src="assets/images/programs/a2.webp" class="d-block w-100" alt="...">
                                     </div>
                                     <div class="carousel-item">
-                                        <img src="assets/images/programs/1.jpg" class="d-block w-100" alt="...">
+                                        <img src="assets/images/programs/a3.webp" class="d-block w-100" alt="...">
                                     </div>
                                     <div class="carousel-item">
-                                        <img src="assets/images/programs/3.jpg" class="d-block w-100" alt="...">
+                                        <img src="assets/images/programs/a4.webp" class="d-block w-100" alt="...">
                                     </div>
                                     <div class="carousel-item">
-                                        <img src="assets/images/programs/4.jpg" class="d-block w-100" alt="...">
+                                        <img src="assets/images/programs/a7.webp" class="d-block w-100" alt="...">
                                     </div>
                                     <div class="carousel-item">
-                                        <img src="assets/images/programs/5.jpg" class="d-block w-100" alt="...">
+                                        <img src="assets/images/programs/a6.webp" class="d-block w-100" alt="...">
                                     </div>
                                     <div class="carousel-item">
-                                        <img src="assets/images/programs/9.jpg" class="d-block w-100" alt="...">
+                                        <img src="assets/images/programs/a8.webp" class="d-block w-100" alt="...">
                                     </div>
                                 </div>
                                 <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"  data-bs-slide="prev">
@@ -429,10 +432,67 @@
                 </div>
             </div>
 
+            <div class="paddfive container" style="background: #bfe6ffcc;">
+                <div class="moduletable">
+                    <div>
+                        <span class="display-2">Тікелей эфир</span>
+                    </div>
+                    <div class="tabs__content tabs__content-trigger sto">
+                        <div class="tabs__content-pane tabs__content-pane--active" id="tab-kz">
+                            <!-- KZ -->
+                            <div class="entry__img-holder">
+                                <div class="embed-responsive embed-responsive-16by9 nx">
+                                    <iframe src="https://jjtv.kz/live4/theme/kz.html" class="video-playlist__content-video"
+                                            style="width: 100%; height: 500px">
+                                    </iframe>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <style>
+                        .containery {
+                            position: relative;
+                            text-align: center;
+                            color: white;
+                        }
+                        .centered {
+                            position: absolute;
+                            top: 80%;
+                            left: 50%;
+                            transform: translate(-50%, -50%);
+                            font-size: 15px;
+                            font-weight: 700;
+                        }
+                        .centered span {
+                            color: red;
+                        }
+                    </style>
+                    <script>
+                        var countDownDate = new Date("Jun 01, 2023 15:30:00").getTime();
+                        var x = setInterval(function() {
+                            var now = new Date().getTime();
+                            var distance = countDownDate - now;
+                            var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                            var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                            var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+
+                            document.getElementById("count").innerHTML = "Трансляция возобновится через <br/><span>" + hours + "  ч "
+                                + minutes + " м " + seconds + " с</span> <br/>Вы можете переключиться на международную версию<br/>(Jibek Joly World)";
+
+                            if (distance < 0) {
+                                clearInterval(x);
+                                location.reload();
+                            }
+                        }, 1000);
+                    </script>		</div>
+            </div>
+
             <!-- Footer START -->
             <div class="footer">
                 <div class="footer-content">
-                    <p class="mb-0">Copyright © 2023 Дипломдық жоба. Барлық құқықтар қорғалған Қазақ Ұлттық Университеті. </p>
+                    <p class="mb-0" style="color: white">Copyright © 2023 Дипломдық жоба. Барлық құқықтар қорғалған Қазақ Ұлттық Университеті. </p>
                 </div>
             </div>
             <!-- Footer End -->

@@ -16,16 +16,19 @@
 
 </head>
 
-<body>
+<body style="background-image: url(https://tengrinews.kz/userdata/news/2022/news_476744/thumb_m/photo_405630.jpeg);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;">
 <div class="layout">
     <div class="horizontal-layout">
         <!-- Header START -->
-        <div class="header-text-dark header-nav layout-horizon">
+        <div class="header-text-dark header-nav layout-horizon" style="background: #023848">
             <div class="header-nav-wrap container">
                 <div class="header-nav-left">
                     <div class="nav-logo">
                         <div class="w-100 logo">
-                            <img class="img-fluid" src="assets/images/logo/logo.png" style="max-height: 70px;" alt="logo">
+                            <img class="logo__img" src="https://jjtv.kz/newdesign/img/Group17.png" srcset="https://jjtv.kz/newdesign/img/Group17.png 1x, /img/logo_default@2x.png 2x" alt="logo" style="max-height: 70px;">
                         </div>
                     </div>
                     <div class="header-nav-item mobile-toggle">
@@ -173,7 +176,7 @@
                             <i class="nav-submenu-arrow caret-bottom"></i>
                         </div>
                         <ul class="nav-menu">
-                            <li class="nav-menu-item">
+                            <li class="nav-menu-item" th:if="${(i.role.name == 'JURGIZYSHI') || (i.role.name == 'OPERATOR') || (i.role.name == 'TILSHI')}">
                                 <a href="/my-suranistar">
                                     <i  class="la-chevron-right la"></i>
                                     <span class="nav-menu-item-title">Менің сұраныстарым</span>
@@ -273,9 +276,8 @@
 
         <!-- Content START -->
         <div class="content container">
-            <div class="main">
-
-                <div class="page-header">
+            <div class="main" style="background: rgb(255 255 255 / 77%);">
+                <div class="page-header" style="margin-left: 20px;">
                     <h4 class="page-title">Сұраныстар</h4>
                     <div class="breadcrumb">
                         <span class="me-1 text-gray"><i class="feather icon-home"></i></span>
@@ -491,6 +493,7 @@
                                             <span class="text-capitalize" th:text="${suranis.status}"></span>
                                         </div>
                                     </td>
+                                    <td sec:authorize="hasAuthority('DISPATCHER')"><a th:href="@{'/to-archive?id=' + ${suranis.id}}">Архивке жіберу</a></td>
                                 </tr>
                                 </tbody>
                                 <tfoot>
@@ -511,7 +514,7 @@
             <!-- Footer START -->
             <div class="footer">
                 <div class="footer-content">
-                    <p class="mb-0">Copyright © 2023 Дипломдық жоба. Барлық құқықтар қорғалған Қазақ Ұлттық Университеті. </p>
+                    <p class="mb-0" style="color: white">Copyright © 2023 Дипломдық жоба. Барлық құқықтар қорғалған Қазақ Ұлттық Университеті. </p>
                 </div>
             </div>
             <!-- Footer End -->

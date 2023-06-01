@@ -41,4 +41,6 @@ public interface ISuranisService {
     List<Suranis> getDepartmentSuranistar(User user);
 
     List<WorkItem> getCalendarByDay(User user);
+
+    void toArchive(Long id);
 }

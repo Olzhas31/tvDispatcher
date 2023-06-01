@@ -16,16 +16,19 @@
 
 </head>
 
-<body>
+<body style="background-image: url(https://tengrinews.kz/userdata/news/2022/news_476744/thumb_m/photo_405630.jpeg);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;">
 <div class="layout">
   <div class="horizontal-layout">
     <!-- Header START -->
-    <div class="header-text-dark header-nav layout-horizon">
+    <div class="header-text-dark header-nav layout-horizon" style="background: #023848">
       <div class="header-nav-wrap container">
         <div class="header-nav-left">
           <div class="nav-logo">
             <div class="w-100 logo">
-              <img class="img-fluid" src="assets/images/logo/logo.png" style="max-height: 70px;" alt="logo">
+              <img class="logo__img" src="https://jjtv.kz/newdesign/img/Group17.png" srcset="https://jjtv.kz/newdesign/img/Group17.png 1x, /img/logo_default@2x.png 2x" alt="logo" style="max-height: 70px;">
             </div>
           </div>
           <div class="header-nav-item mobile-toggle">
@@ -173,8 +176,8 @@
               <i class="nav-submenu-arrow caret-bottom"></i>
             </div>
             <ul class="nav-menu">
-              <li class="nav-menu-item">
-                <a href="/my-suranistar">
+              <li class="nav-menu-item" th:if="${(i.role.name == 'JURGIZYSHI') || (i.role.name == 'OPERATOR') || (i.role.name == 'TILSHI')}">
+                <a href="/my-suranistar" >
                   <i  class="la-chevron-right la"></i>
                   <span class="nav-menu-item-title">Менің сұраныстарым</span>
                 </a>
@@ -273,53 +276,55 @@
 
     <!-- Content START -->
     <div class="content container">
-      <div class="main">
+      <div class="main" style="background: white">
+        <div style="padding-left: 100px">
+          <h2>Жаңа сұраныс құру</h2>
+          <div th:if="${isSuranisCreated}" class="alert alert-success">
+            Сіздің сұранысыңыз сәтті құрылды
+          </div>
 
-        <h2>Жаңа сұраныс құру</h2>
-        <div th:if="${isSuranisCreated}" class="alert alert-success">
-          Сіздің сұранысыңыз сәтті құрылды
-        </div>
-
-        <span>
+          <span>
                     Біздің телеарна сіздерге келу үшін келесі форманы толтырып жіберіңіз
                 </span>
-        <!--                TODO lael id-->
-        <form method="post" action="/create-suranis" style="width: 500px;">
-          <div class="mb-3">
-            <label class="form-label">Аты-жөніңіз</label>
-            <input type="text" name="name" class="form-control" placeholder="Name" required>
-          </div>
-          <div class="mb-3">
-            <label class="form-label">Сұраныс тақырыбы</label>
-            <input type="text" name="title" class="form-control" placeholder="Title" required>
-          </div>
-          <div class="mb-3">
-            <label class="form-label">Телевидение шақыру себебіңіз</label>
-            <input type="text" name="description" class="form-control" placeholder="Description" required>
-          </div>
-          <div class="mb-3">
-            <label class="form-label">Электрондық почтаңыз</label>
-            <input type="email" name="email" class="form-control" placeholder="Email" required>
-          </div>
-          <div class="mb-3">
-            <label class="form-label">Телефон номеріңіз</label>
-            <input type="text" name="phoneNumber" class="form-control" placeholder="phoneNumber" required>
-          </div>
-          <div class="mb-3">
-            <label class="form-label">Телевидениемен кездесетін мекенжай</label>
-            <input type="text" name="address" class="form-control" placeholder="Address" required>
-          </div>
-          <div class="mb-3">
-            <label class="form-label">Телевидениемен кездесетін уақыт</label>
-            <input type="datetime-local" name="meetingTime" class="form-control" required>
-          </div>
-          <input class="btn btn-primary" type="submit" value="Жіберу">
-        </form>
+          <!--                TODO lael id-->
+          <form method="post" action="/create-suranis" style="width: 500px;">
+            <div class="mb-3">
+              <label class="form-label">Аты-жөніңіз</label>
+              <input type="text" name="name" class="form-control" placeholder="Толық аты-жөгіңіз" required>
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Сұраныс тақырыбы</label>
+              <input type="text" name="title" class="form-control" placeholder="Тақырыбы" required>
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Телевидение шақыру себебіңіз</label>
+              <input type="text" name="description" class="form-control" placeholder="Сипаттамасы" required>
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Электрондық почтаңыз</label>
+              <input type="email" name="email" class="form-control" placeholder="Почта" required>
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Телефон номеріңіз</label>
+              <input type="text" name="phoneNumber" class="form-control" placeholder="Байланыс номері" required>
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Телевидениемен кездесетін мекенжай</label>
+              <input type="text" name="address" class="form-control" placeholder="Мекен-жай" required>
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Телевидениемен кездесетін уақыт</label>
+              <input type="datetime-local" name="meetingTime" class="form-control" required>
+            </div>
+            <input class="btn btn-primary" type="submit" value="Жіберу">
+          </form>
+        </div>
+
       </div>
       <!-- Footer START -->
       <div class="footer">
         <div class="footer-content">
-          <p class="mb-0">Copyright © 2023 Дипломдық жоба. Барлық құқықтар қорғалған Қазақ Ұлттық Университеті. </p>
+          <p class="mb-0" style="color: white">Copyright © 2023 Дипломдық жоба. Барлық құқықтар қорғалған Қазақ Ұлттық Университеті. </p>
         </div>
       </div>
       <!-- Footer End -->

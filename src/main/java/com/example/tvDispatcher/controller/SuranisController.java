@@ -139,4 +139,10 @@ public class SuranisController {
         suranisService.toProcess(id);
         return "redirect:/dispatcher-suranistar";
     }
+
+    @GetMapping("/to-archive")
+    public String toArchive(@RequestParam(name = "id") Long id) {
+        suranisService.toArchive(id);
+        return "redirect:/dispatcher-suranistar";
+    }
 }

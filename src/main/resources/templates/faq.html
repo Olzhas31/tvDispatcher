@@ -16,16 +16,19 @@
 
 </head>
 
-<body>
+<body style="background-image: url(https://tengrinews.kz/userdata/news/2022/news_476744/thumb_m/photo_405630.jpeg);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;">
 <div class="layout">
   <div class="horizontal-layout">
     <!-- Header START -->
-    <div class="header-text-dark header-nav layout-horizon">
+    <div class="header-text-dark header-nav layout-horizon" style="background: #023848">
       <div class="header-nav-wrap container">
         <div class="header-nav-left">
           <div class="nav-logo">
             <div class="w-100 logo">
-              <img class="img-fluid" src="assets/images/logo/logo.png" style="max-height: 70px;" alt="logo">
+              <img class="logo__img" src="https://jjtv.kz/newdesign/img/Group17.png" srcset="https://jjtv.kz/newdesign/img/Group17.png 1x, /img/logo_default@2x.png 2x" alt="logo" style="max-height: 70px;">
             </div>
           </div>
           <div class="header-nav-item mobile-toggle">
@@ -173,7 +176,7 @@
               <i class="nav-submenu-arrow caret-bottom"></i>
             </div>
             <ul class="nav-menu">
-              <li class="nav-menu-item">
+              <li class="nav-menu-item" th:if="${(i.role.name == 'JURGIZYSHI') || (i.role.name == 'OPERATOR') || (i.role.name == 'TILSHI')}">
                 <a href="/my-suranistar">
                   <i  class="la-chevron-right la"></i>
                   <span class="nav-menu-item-title">Менің сұраныстарым</span>
@@ -274,8 +277,8 @@
 
     <!-- Content START -->
     <div class="content container">
-      <div class="main">
-        <div class="page-header">
+      <div class="main" style="background: rgb(255 255 255 / 77%);">
+        <div class="page-header" style="margin-left: 20px;">
           <h4 class="page-title">Сұрақ-жауап</h4>
           <div class="breadcrumb">
             <span class="me-1 text-gray"><i class="feather icon-home"></i></span>
@@ -304,7 +307,7 @@
                     <div class="d-inline-block rounded-circle" style="background-color: rgba(17, 161, 253, 0.1);">
                       <i class="h1 mb-0 p-3 las la-compass" style="color: rgb(17, 161, 253);"></i>
                     </div>
-                    <h5 class="mt-3 mb-0">Navigation</h5>
+                    <h5 class="mt-3 mb-0">Біздің мекенжай</h5>
                   </div>
                 </div>
               </div>
@@ -314,7 +317,7 @@
                     <div class="d-inline-block rounded-circle" style="background-color: rgba(90, 117, 249, 0.1);">
                       <i class="h1 mb-0 p-3 las la-tag" style="color: rgb(90, 117, 249);"></i>
                     </div>
-                    <h5 class="mt-3 mb-0">Price & Plans</h5>
+                    <h5 class="mt-3 mb-0">Біздің бағдарламалар</h5>
                   </div>
                 </div>
               </div>
@@ -324,7 +327,7 @@
                     <div class="d-inline-block rounded-circle" style="background-color: rgba(255, 152, 66, 0.1);">
                       <i class="h1 mb-0 p-3 las la-user-friends" style="color: rgb(255, 152, 66);"></i>
                     </div>
-                    <h5 class="mt-3 mb-0">Affiliate</h5>
+                    <h5 class="mt-3 mb-0">Біздің жұмыс топтар</h5>
                   </div>
                 </div>
               </div>
@@ -334,7 +337,7 @@
                     <div class="d-inline-block rounded-circle" style="background-color: rgba(0, 197, 105, 0.1);">
                       <i class="h1 mb-0 p-3 las las la-book" style="color: rgb(0, 197, 105);"></i>
                     </div>
-                    <h5 class="mt-3 mb-0">Usage</h5>
+                    <h5 class="mt-3 mb-0">Сұраныс құру</h5>
                   </div>
                 </div>
               </div>
@@ -412,40 +415,6 @@
                       </div>
                     </div>
                   </div>
-                  <div class="panel card">
-                    <h2 class="card-header panel-heading">
-                      <div class="panel-title">
-                        <div class="accordion-toggle">
-                          <button class="btn btn-link d-block w-100 text-start collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#item5">
-                            <i class="feather icon-chevron-right text-primary d-inline-block accordion-icon"></i>
-                            <span class="ms-2">How to apply?</span>
-                          </button>
-                        </div>
-                      </div>
-                    </h2>
-                    <div id="item5" class="collapse" data-bs-parent="#faqContent">
-                      <div class="accordion-body panel-body card-body">
-                        Qui animated corpse, cricket bat max brucks terribilem incessu zomby. The voodoo sacerdos flesh eater, suscitat mortuos comedere carnem virus. Zonbi tattered for solum oculi eorum defunctis go lum cerebro. Nescio brains an Undead zombies. Sicut malus putrid voodoo horror. Nigh tofth eliv ingdead.
-                      </div>
-                    </div>
-                  </div>
-                  <div class="panel card">
-                    <h2 class="card-header panel-heading">
-                      <div class="panel-title">
-                        <div class="accordion-toggle">
-                          <button class="btn btn-link d-block w-100 text-start collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#item6">
-                            <i class="feather icon-chevron-right text-primary d-inline-block accordion-icon"></i>
-                            <span class="ms-2">Is it secure?</span>
-                          </button>
-                        </div>
-                      </div>
-                    </h2>
-                    <div id="item6" class="collapse" data-bs-parent="#faqContent">
-                      <div class="accordion-body panel-body card-body">
-                        Qui animated corpse, cricket bat max brucks terribilem incessu zomby. The voodoo sacerdos flesh eater, suscitat mortuos comedere carnem virus. Zonbi tattered for solum oculi eorum defunctis go lum cerebro. Nescio brains an Undead zombies. Sicut malus putrid voodoo horror. Nigh tofth eliv ingdead.
-                      </div>
-                    </div>
-                  </div>
                 </div>
               </div>
             </div>
@@ -455,7 +424,7 @@
       <!-- Footer START -->
       <div class="footer">
         <div class="footer-content">
-          <p class="mb-0">Copyright © 2023 Дипломдық жоба. Барлық құқықтар қорғалған Қазақ Ұлттық Университеті. </p>
+          <p class="mb-0" style="color: white">Copyright © 2023 Дипломдық жоба. Барлық құқықтар қорғалған Қазақ Ұлттық Университеті. </p>
         </div>
       </div>
       <!-- Footer End -->

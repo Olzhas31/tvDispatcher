@@ -16,16 +16,19 @@
 
 </head>
 
-<body>
+<body style="background-image: url(https://tengrinews.kz/userdata/news/2022/news_476744/thumb_m/photo_405630.jpeg);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;">
 <div class="layout">
     <div class="horizontal-layout">
         <!-- Header START -->
-        <div class="header-text-dark header-nav layout-horizon">
+        <div class="header-text-dark header-nav layout-horizon" style="background: #023848">
             <div class="header-nav-wrap container">
                 <div class="header-nav-left">
                     <div class="nav-logo">
                         <div class="w-100 logo">
-                            <img class="img-fluid" src="assets/images/logo/logo.png" style="max-height: 70px;" alt="logo">
+                            <img class="logo__img" src="https://jjtv.kz/newdesign/img/Group17.png" srcset="https://jjtv.kz/newdesign/img/Group17.png 1x, /img/logo_default@2x.png 2x" alt="logo" style="max-height: 70px;">
                         </div>
                     </div>
                     <div class="header-nav-item mobile-toggle">
@@ -173,7 +176,7 @@
                             <i class="nav-submenu-arrow caret-bottom"></i>
                         </div>
                         <ul class="nav-menu">
-                            <li class="nav-menu-item">
+                            <li class="nav-menu-item" th:if="${(i.role.name == 'JURGIZYSHI') || (i.role.name == 'OPERATOR') || (i.role.name == 'TILSHI')}">
                                 <a href="/my-suranistar">
                                     <i  class="la-chevron-right la"></i>
                                     <span class="nav-menu-item-title">Менің сұраныстарым</span>
@@ -274,8 +277,8 @@
 
         <!-- Content START -->
         <div class="content container">
-            <div class="main">
-                <div class="page-header">
+            <div class="main" style="background: rgb(255 255 255 / 77%);">
+                <div class="page-header" style="margin-left: 20px;">
                     <h4 class="page-title">Біз туралы</h4>
                     <div class="breadcrumb">
                         <span class="me-1 text-gray"><i class="feather icon-home"></i></span>
@@ -292,15 +295,83 @@
                                 <div class="card-body">
                                     <p> Мекенжайымыз: Қазақстан Республикасы, 010000, Астана қаласы, Есіл ауданы, Д. Қонаев көшесі, 4 үй </p>
                                     <p> Қабылдау бөлімі: +7 (7172) 757-500, +7 (7172) 757-600 (Астана)</p>
-                                    <p> Құжаттамалық қамтамасыз ету бөлімі (Канцелярия): +7 (7172) 757 575, astana@khabar.kz</p>
+                                    <p> Құжаттамалық қамтамасыз ету бөлімі (Канцелярия): +7 (7172) 757 575, astana@jibek-joly.kz</p>
                                     <p> Қызметкерлерді басқару бөлімі: +7 (7172) 757 495, +7 (7172) 757 660</p>
                                     <p> Коммерциялық дирекция: +7 (7172) 757-555, +7 (7172) 757-556 </p>
-                                    <p> «Хабар» арнасының жаңалықтар қызметі: +7 (7172) 757 540, +7 (7172) 757 605 (Астана), +7 (7272) 700 122 (Алматы), astananews@khabar.kz </p>
-                                    <p> «Хабар 24» телеарнасы: +7 (7172) 757-485, +7 (7172) 757- 643 </p>
-                                    <p> EL ARNA телеарнасы: + 7 (7172) 70 10 97, +7 (7172) 70 10 69 </p>
-                                    <p> Жарнама бойынша: sales@khabar.kz</p>
+                                    <p> «Jibek Joly» арнасының жаңалықтар қызметі: +7 (7172) 757 540, +7 (7172) 757 605 (Астана), +7 (7272) 700 122 (Алматы), news@jibek-joly.kz </p>
+                                    <p> «Jibek Joly» телеарнасы: +7 (7172) 757-485, +7 (7172) 757- 643 </p>
+                                    <p> Jibek Joly телеарнасы: + 7 (7172) 70 10 97, +7 (7172) 70 10 69 </p>
+                                    <p> Жарнама бойынша: sales@jibek-joly.kz</p>
                                     <p> Алматы филиалы: Қазақстан Республикасы, 050013, Алматы қаласы, Желтоқсан көшесі, 185 үй</p>
-                                    <p> Қабылдау бөлімі: +7 (727) 2583-610 (Алматы), khabar@khabar.kz</p>
+                                    <p> Қабылдау бөлімі: +7 (727) 2583-610 (Алматы), qabildau@jibek-joly.kz</p>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-6 col-md-2 icon-demo-col">
+                                        <div class="card mb-4 icon-demo">
+                                            <div class="card-body text-center">
+                                                <a href="https://t.me/tvkhabar24">
+                                                    <img src="https://24.kz/images/social/telegram.png" style="width: 100px">
+                                                </a>
+                                                <p class="mt-2 mb-0">Telegram</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-6 col-md-2 icon-demo-col">
+                                        <div class="card mb-4 icon-demo">
+                                            <div class="card-body text-center">
+                                                <a href="https://www.youtube.com/channel/UCnAFKvDuqBGkIfV8Vn0J_CQ">
+                                                    <img src="https://24.kz/images/social/youtube.png" style="width: 100px">
+                                                </a>
+                                                <p class="mt-2 mb-0">Youtube</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-6 col-md-2 icon-demo-col">
+                                        <div class="card mb-4 icon-demo">
+                                            <div class="card-body text-center">
+                                                <a href="https://twitter.com/tvkhabar24">
+                                                    <img src="https://24.kz/images/social/twitter.png" style="width: 100px">
+                                                </a>
+                                                <p class="mt-2 mb-0">Twitter</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-6 col-md-2 icon-demo-col">
+                                        <div class="card mb-4 icon-demo">
+                                            <div class="card-body text-center">
+                                                <a href="https://www.tiktok.com/@24khabar?_d=secCgwIARCbDRjEFSADKAESPgo8ZfT8i1E1yZU9YsxT4sgHw01SvQvxreWGdkK8TVmGpo3YZ%2BFt5UGyoWbgPS0M%2FSbKPU2qiRSNI6qhGffuGgA%3D&checksum=9204d39285137a6e001889784ad65f123979bfa6642151389724773623af3e99&language=ru&sec_uid=MS4wLjABAAAAeQPoXqHxE8tF4CYkhlsW7gq4mETYkxYBz13SljmIM8PLnImsh2c0ImqHYSboxJhX&sec_user_id=MS4wLjABAAAAeQPoXqHxE8tF4CYkhlsW7gq4mETYkxYBz13SljmIM8PLnImsh2c0ImqHYSboxJhX&share_app_id=1233&share_author_id=6999671651819291653&share_link_id=E121C392-300A-4CF1-8282-E2FB907394F9&tt_from=copy&u_code=dk97mjklkdfb52&user_id=6999671651819291653&utm_campaign=client_share&utm_medium=ios&utm_source=copy&source=h5_m&_r=1">
+                                                    <img src="https://24.kz/images/social/tiktok.png" style="width: 100px">
+                                                </a>
+                                                <p class="mt-2 mb-0">Tiktok</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-6 col-md-2 icon-demo-col">
+                                        <div class="card mb-4 icon-demo">
+                                            <div class="card-body text-center">
+                                                <a href="https://www.instagram.com/khabar24_tv/">
+                                                    <img src="https://24.kz/images/social/instagram.png" style="width: 100px">
+                                                </a>
+                                                <p class="mt-2 mb-0">Instagram</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-6 col-md-2 icon-demo-col">
+                                        <div class="card mb-4 icon-demo">
+                                            <div class="card-body text-center">
+                                                <a href="https://www.facebook.com/tvkhabar24/">
+                                                    <img src="https://24.kz/images/social/fb.png" style="width: 100px">
+                                                </a>
+                                                <p class="mt-2 mb-0">Telegram</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="card-body">
+                                    <p> «Қазақстан Республикасы Президентінің Телерадиокешені» КЕАҚ құрылымына кіретін Jibek Joly телеарнасы, 2022 жылдың 1 қыркүйегінен бастап қазақ және орыс тілдерінде хабар тарата бастады. Jibek Joly - SilkWay телеарнасының ел аумағындағы нұсқасы ретінде, отбасылық, ойын-сауықтық бағдарламалар дайындайды.</p>
+                                    <p> Телеарнада негізінен отандық өнімдерге басымдық берілген. "Жаңа Уақыт", "Новое время"ақпараттық-сараптамалық бағдарламалары, сондай-ақ «Кривошеев Live», «JJ Talk» сияқты қоғамдық-саяси және «Ел» әлеуметтік ток-шоулары, «Түнгі студияда» Нұрлан Қоянбаев», «Жақсы адамдарым» тағы басқа ойын-сауық, танымдық жобаларын ұсынады. Сонымен қатар, Jibek Joly арнасында әлемдік киноматографияның танымал туындылары, қызықты телесериалдар, қазақ тіліне аударылған мультфильмдер және Silk Way мұрағатындағы үздік бағдарламалар көрсетіледі.</p>
                                 </div>
                             </div>
                         </div>
@@ -309,15 +380,15 @@
 
                 <div class="card">
                     <div class="card-body">
-                        <h4>«Хабар» Агенттігі» АҚ «Сенім телефоны»:</h4>
+                        <h4>«Jibek Joly» АҚ «Сенім телефоны»:</h4>
                         <div class="mt-4">
                             <div class="card" style="max-width: 600px">
-                                <div class="card-body">
+                                <div class="card-body" style="background: lightgoldenrodyellow">
                                     <p>
                                         Жеке тұлғаларды және заңды тұлғалардың өкілдерін жеке қабылдау мәселелері, сондай-ақ өтініштер мен сұрау салуларды қарау нәтижелері бойынша шешімдерге және (немесе) әрекеттерге (әрекетсіздікке) шағымдану тәртібін қоса алғанда, өтініштер мен сұрау салуларды қарау мәселелері бойынша ақпаратты көрсетілген байланыс деректері арқылы ала аласыз:
                                     </p>
                                     <p>
-                                        Сафурина Райгуль Амиржановна – тел. +7 (717)2 75-75-75, е-mail: r.safurina@khabar.kz
+                                        Сафурина Райгуль Амиржановна – тел. +7 (717)2 75-75-75, е-mail: r.safurina@jibek-joly.kz
                                     </p>
                                 </div>
                             </div>
@@ -329,7 +400,7 @@
             <!-- Footer START -->
             <div class="footer">
                 <div class="footer-content">
-                    <p class="mb-0">Copyright © 2023 Дипломдық жоба. Барлық құқықтар қорғалған Қазақ Ұлттық Университеті. </p>
+                    <p class="mb-0" style="color: white">Copyright © 2023 Дипломдық жоба. Барлық құқықтар қорғалған Қазақ Ұлттық Университеті. </p>
                 </div>
             </div>
             <!-- Footer End -->

@@ -310,6 +310,13 @@ public class SuranisServiceImpl implements ISuranisService {
                 .distinct().toList();
     }
 
+    @Override
+    public void toArchive(Long id) {
+        Suranis suranis = suranisRepository.findById(id).orElseThrow(RuntimeException::new);
+        suranis.setStatus(Status.ZHABILDI);
+        suranisRepository.save(suranis);
+    }
+
     private boolean isAllManagersApprove(Suranis suranis) {
         for (UsersSuranistar item : suranis.getEmployees()) {
             if (item.getManagerApproved() == null) {
